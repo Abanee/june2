@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============ SEO META ============ -->
+  <title>About Us — Current Aquatics Academy | Our Story, Safety & Standards</title>
+  <meta name="description" content="Discover the story, mission, world-class facilities, and safety standards behind Current Aquatics Academy — a premium swimming academy training confident swimmers since 2010." />
+  <meta name="keywords" content="swimming academy about us, swim school story, swimming facility safety, certified swim coaches, olympic pool academy" />
+  <meta name="author" content="Current Aquatics Academy" />
+  <link rel="canonical" href="https://www.currentaquatics.com/about.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="About Us — Current Aquatics Academy" />
+  <meta property="og:description" content="Our story, mission, facilities, safety standards, and achievements — built for swimmers who take it seriously." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1600965962361-9035dbfd1c50?q=80&w=1200" />
+  <meta property="og:url" content="https://www.currentaquatics.com/about.html" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About Us — Current Aquatics Academy" />
+  <meta name="twitter:description" content="Our story, mission, facilities, safety standards, and achievements." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1600965962361-9035dbfd1c50?q=80&w=1200" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Current Aquatics Academy",
+    "description": "Premium swimming academy offering classes for kids, adults, women, and competitive swimmers, founded in 2010.",
+    "mainEntity": {
+      "@type": "SportsActivityLocation",
+      "name": "Current Aquatics Academy",
+      "foundingDate": "2010"
+    }
+  }
+  </script>
+
+  <!-- ============ FONTS ============ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- ============ TAILWIND CDN ============ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Poppins', 'sans-serif'],
+            body: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            'deep': '#071B2F',
+            'deep-2': '#0D2E4D',
+            'cyan': '#00D4FF',
+            'blue': '#3B82F6',
+            'sky': '#38BDF8',
+            'lt-bg': '#F6FBFF',
+            'lt-card': '#FFFFFF',
+            'lt-primary': '#0284C7',
+            'lt-secondary': '#0EA5E9',
+            'lt-accent': '#38BDF8',
+            'lt-text': '#0F172A',
+            'lt-sub': '#64748B',
+            'lt-border': '#E2E8F0',
+          },
+          borderRadius: {
+            'brand': '22px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="font-body antialiased">
+
+  <!-- ============================================================ -->
+  <!-- LOADING SCREEN                                                -->
+  <!-- ============================================================ -->
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader-ripple"></div>
+    <p class="preloader-text">CURRENT</p>
+  </div>
+
+  <!-- Skip link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ============================================================ -->
+  <!-- NAVIGATION                                                    -->
+  <!-- ============================================================ -->
+  <header>
+    <nav id="navbar" class="navbar" aria-label="Primary navigation">
+      <div class="navbar-inner">
+
+        <a href="index.html#home" class="logo" aria-label="Current Aquatics Academy home">
+          <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="19" stroke="url(#logoGrad)" stroke-width="2"/>
+            <path d="M8 22c2-2 4-2 6 0s4 2 6 0 4-2 6 0 4 2 6 0" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 16c2-2 4-2 6 0s4 2 6 0 4-2 6 0 4 2 6 0" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+                <stop offset="0%" stop-color="#00D4FF"/>
+                <stop offset="50%" stop-color="#2563EB"/>
+                <stop offset="100%" stop-color="#0EA5E9"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="logo-text">CURRENT</span>
+        </a>
+
+        <ul class="nav-links" role="list">
+          <li><a href="index.html#home" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link active-link" aria-current="page">About</a></li>
+          <li><a href="programs.html" class="nav-link">Programs</a></li>
+          <li><a href="coaches.html" class="nav-link">Coaches</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark and light mode" aria-pressed="false">
+            <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+            <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>
+          </button>
+
+          <a href="index.html#contact" class="btn-enroll magnetic">
+            <span>Enroll Now</span>
+          </a>
+
+          <button id="menuToggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
+      <ul role="list">
+        <li><a href="index.html#home" class="mobile-link">Home</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="programs.html" class="mobile-link">Programs</a></li>
+        <li><a href="coaches.html" class="mobile-link">Coaches</a></li>
+        <li><a href="gallery.html" class="mobile-link">Gallery</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact</a></li>
+      </ul>
+      <a href="index.html#contact" class="btn-enroll w-full justify-center">Enroll Now</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ============================================================ -->
+    <!-- SECTION 1 — ABOUT HERO (PHOTO BACKDROP + STATS STRIP)        -->
+    <!-- ============================================================ -->
+    <section class="about-hero" aria-label="About introduction">
+      <!-- Full-bleed photo bg -->
+      <div class="about-hero-photo" role="img" aria-label="Olympic swimming pool at current aquatics academy"></div>
+      <!-- Gradient overlay layers -->
+      <div class="about-hero-overlay" aria-hidden="true"></div>
+      <!-- Animated water shimmer -->
+      <canvas id="waterCanvas" class="hero-canvas about-canvas" aria-hidden="true"></canvas>
+
+      <!-- Center content -->
+      <div class="about-hero-center fade-up">
+        <div class="about-eyebrow-wrap">
+          <span class="about-eyebrow-line"></span>
+          <span class="about-eyebrow-text">About Current Aquatics Academy</span>
+          <span class="about-eyebrow-line"></span>
+        </div>
+
+        <h1 class="about-hero-title">
+          Building <em class="about-accent">Confident</em><br>
+          Swimmers Since 2010
+        </h1>
+
+        <p class="about-hero-sub">What started as a single lane and a coach who believed every child could learn to swim safely has grown into an Olympic-standard academy trusted by thousands of families.</p>
+
+        <div class="about-hero-ctas">
+          <a href="programs.html" class="btn-primary magnetic">Learn Programs</a>
+          <a href="index.html#contact" class="btn-ghost-white magnetic">Contact Us</a>
+        </div>
+      </div>
+
+      <!-- Bottom stats strip -->
+      <div class="about-stats-strip" aria-label="Academy statistics">
+        <div class="about-stat-cell">
+          <span class="about-stat-num">5000<sup>+</sup></span>
+          <span class="about-stat-label">Students Trained</span>
+        </div>
+        <div class="about-stat-sep" aria-hidden="true"></div>
+        <div class="about-stat-cell">
+          <span class="about-stat-num">15<sup>+</sup></span>
+          <span class="about-stat-label">Years of Excellence</span>
+        </div>
+        <div class="about-stat-sep" aria-hidden="true"></div>
+        <div class="about-stat-cell">
+          <span class="about-stat-num">25<sup>+</sup></span>
+          <span class="about-stat-label">Certified Coaches</span>
+        </div>
+        <div class="about-stat-sep" aria-hidden="true"></div>
+        <div class="about-stat-cell">
+          <span class="about-stat-num">100<sup>%</sup></span>
+          <span class="about-stat-label">Safety Record</span>
+        </div>
+      </div>
+
+      <button class="scroll-indicator" aria-label="Scroll to our story" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">
+        <span></span>
+      </button>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2 — OUR STORY                                         -->
+    <!-- ============================================================ -->
+    <section id="story" class="section story-section" aria-label="Our story">
+      <div class="container">
+        <div class="story-grid">
+          <div class="story-img-wrap fade-left">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?q=80&w=900" alt="Current Aquatics Academy's original training pool" />
+            <div class="story-badge">
+              <strong>2010</strong>
+              <span>Where it all began</span>
+            </div>
+          </div>
+
+          <div class="story-copy fade-right">
+            <p class="eyebrow eyebrow-dark">Our Story</p>
+            <h2>A pool, a coach, and a promise to every parent</h2>
+            <p>Current Aquatics Academy was founded in 2010 by a national-level swimmer who watched too many adults avoid the water out of fear learned as children. The goal was simple: build a place where water confidence came before technique, and where safety was never negotiable.</p>
+            <p>What began as after-school lessons in a single community pool grew, batch by batch, into a full Olympic-standard facility. Along the way, our coaches stayed close to one idea — every swimmer, regardless of age or ability, deserves patient, professional instruction in a genuinely safe environment.</p>
+            <p>Today, that same philosophy shapes every class we run, from a four-year-old's first splash to a competitive athlete's final lap before a state final. We measure our growth not just in square footage, but in the thousands of confident swimmers we've sent back into the world.</p>
+
+            <div class="story-timeline">
+              <div class="story-timeline-item">
+                <strong>2010</strong>
+                <span>Academy founded</span>
+              </div>
+              <div class="story-timeline-item">
+                <strong>2014</strong>
+                <span>Olympic pool opened</span>
+              </div>
+              <div class="story-timeline-item">
+                <strong>2018</strong>
+                <span>International certification</span>
+              </div>
+              <div class="story-timeline-item">
+                <strong>2025</strong>
+                <span>5,000+ students trained</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 3 — MISSION / VISION / VALUES                         -->
+    <!-- ============================================================ -->
+    <section class="section" aria-label="Mission, vision, and values">
+      <div class="container">
+        <div class="section-head fade-up">
+          <p class="eyebrow eyebrow-dark">What Drives Us</p>
+          <h2 class="section-title">Mission, vision &amp; core values</h2>
+          <p class="section-sub">The three ideas that shape every decision we make — from how we hire coaches to how we design a class for a nervous first-timer.</p>
+        </div>
+
+        <div class="mvv-grid">
+          <article class="mvv-card tilt-card fade-up">
+            <div class="why-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>
+            </div>
+            <h3>Our Mission</h3>
+            <p>To deliver world-class swimming education to every student we teach — building water safety, technical skill, and genuine confidence in equal measure, regardless of age or starting ability.</p>
+          </article>
+
+          <article class="mvv-card tilt-card fade-up">
+            <div class="why-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            </div>
+            <h3>Our Vision</h3>
+            <p>To be recognized as the region's most trusted swimming institution — expanding access to elite-level coaching while producing the next generation of state and national champions.</p>
+          </article>
+
+          <article class="mvv-card tilt-card fade-up">
+            <div class="why-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <h3>Core Values</h3>
+            <div class="values-chip-grid">
+              <div class="values-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Safety</div>
+              <div class="values-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Discipline</div>
+              <div class="values-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Confidence</div>
+              <div class="values-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Respect</div>
+              <div class="values-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Excellence</div>
+              <div class="values-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Teamwork</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 4 — WORLD-CLASS FACILITIES                            -->
+    <!-- ============================================================ -->
+    <section class="section facilities-section" aria-label="Our facilities" style="background: var(--bg-2);">
+      <div class="container">
+        <div class="section-head fade-up">
+          <p class="eyebrow eyebrow-dark">Our Campus</p>
+          <h2 class="section-title">World-class facilities</h2>
+          <p class="section-sub">Every space on our campus is built and maintained to a single standard: safe enough for a first-timer, serious enough for a competitive athlete.</p>
+        </div>
+
+        <div class="facilities-grid">
+          <article class="facility-card fade-up">
+            <div class="facility-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=700" alt="Olympic-standard 50 metre swimming pool" />
+              <span class="facility-badge">Signature</span>
+            </div>
+            <div class="facility-body"><h3>Olympic Pool</h3><p>10-lane, 50m heated pool with electronic lap timing.</p></div>
+          </article>
+
+          <article class="facility-card fade-up">
+            <div class="facility-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1560090995-01632a28895b?q=80&w=700" alt="Shallow training pool for young children" />
+              <span class="facility-badge">Kids</span>
+            </div>
+            <div class="facility-body"><h3>Kids Training Pool</h3><p>Shallow, temperature-controlled pool for first-time swimmers.</p></div>
+          </article>
+
+          <article class="facility-card fade-up">
+            <div class="facility-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1600881333168-2ef49b341f30?q=80&w=700" alt="Heated indoor swimming pool" />
+              <span class="facility-badge">Year-round</span>
+            </div>
+            <div class="facility-body"><h3>Heated Pool</h3><p>Indoor heated pool keeps sessions running through winter.</p></div>
+          </article>
+
+          <article class="facility-card fade-up">
+            <div class="facility-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=700" alt="Clean, modern locker room" />
+              <span class="facility-badge">Comfort</span>
+            </div>
+            <div class="facility-body"><h3>Locker Rooms</h3><p>Secure, monitored lockers with daily sanitation.</p></div>
+          </article>
+
+          <article class="facility-card fade-up">
+            <div class="facility-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?q=80&w=700" alt="Private changing rooms" />
+              <span class="facility-badge">Private</span>
+            </div>
+            <div class="facility-body"><h3>Changing Rooms</h3><p>Private family and individual changing suites.</p></div>
+          </article>
+
+          <article class="facility-card fade-up">
+            <div class="facility-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=700" alt="Modern shower facilities" />
+              <span class="facility-badge">Hygiene</span>
+            </div>
+            <div class="facility-body"><h3>Showers</h3><p>Pre- and post-swim showers, cleaned every hour.</p></div>
+          </article>
+
+          <article class="facility-card fade-up">
+            <div class="facility-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=700" alt="Spectator seating overlooking the pool" />
+              <span class="facility-badge">Viewing</span>
+            </div>
+            <div class="facility-body"><h3>Spectator Seating</h3><p>Elevated poolside seating with full-session views.</p></div>
+          </article>
+
+          <article class="facility-card fade-up">
+            <div class="facility-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1517502884422-41eaead166d4?q=80&w=700" alt="Comfortable parents lounge" />
+              <span class="facility-badge">Relax</span>
+            </div>
+            <div class="facility-body"><h3>Parents Lounge</h3><p>Air-conditioned lounge with free Wi-Fi and refreshments.</p></div>
+          </article>
+
+          <article class="facility-card fade-up">
+            <div class="facility-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=700" alt="Academy reception desk" />
+              <span class="facility-badge">Welcome</span>
+            </div>
+            <div class="facility-body"><h3>Reception</h3><p>Friendly front desk for enrollment and enquiries.</p></div>
+          </article>
+
+          <article class="facility-card fade-up">
+            <div class="facility-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=700" alt="Ample dedicated parking" />
+              <span class="facility-badge">Convenient</span>
+            </div>
+            <div class="facility-body"><h3>Parking</h3><p>On-site parking with drop-off lane for families.</p></div>
+          </article>
+
+          <article class="facility-card fade-up">
+            <div class="facility-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=700" alt="Water filtration and treatment system" />
+              <span class="facility-badge">Clean Water</span>
+            </div>
+            <div class="facility-body"><h3>Water Filtration</h3><p>Medical-grade UV filtration, tested every two hours.</p></div>
+          </article>
+
+          <article class="facility-card fade-up">
+            <div class="facility-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=700" alt="Professional swim training equipment area" />
+              <span class="facility-badge">Pro Gear</span>
+            </div>
+            <div class="facility-body"><h3>Equipment Area</h3><p>Pace clocks, resistance bands, and underwater cameras.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 5 — SAFETY & TRAINING STANDARDS                       -->
+    <!-- ============================================================ -->
+    <section class="section safety-section" aria-label="Safety and training standards">
+      <div class="container">
+        <div class="section-head fade-up">
+          <p class="eyebrow eyebrow-dark">Trust &amp; Safety</p>
+          <h2 class="section-title">Safety &amp; training standards</h2>
+          <p class="section-sub">This is the section every parent reads first — and the one we take the most seriously. Here's exactly how we keep every swimmer safe, every session.</p>
+        </div>
+
+        <div class="safety-grid">
+          <div class="safety-card fade-up">
+            <div class="safety-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div><h3>Certified Lifeguards</h3><p>On every deck, every session, no exceptions.</p></div>
+          </div>
+          <div class="safety-card fade-up">
+            <div class="safety-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div><h3>Water Quality Monitoring</h3><p>Chemical and clarity checks every two hours.</p></div>
+          </div>
+          <div class="safety-card fade-up">
+            <div class="safety-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div><h3>First Aid Station</h3><p>Fully stocked station staffed during all hours.</p></div>
+          </div>
+          <div class="safety-card fade-up">
+            <div class="safety-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div><h3>Emergency Response</h3><p>Drilled protocols and direct lines to local EMS.</p></div>
+          </div>
+          <div class="safety-card fade-up">
+            <div class="safety-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div><h3>CCTV Monitoring</h3><p>Full-campus coverage reviewed by our safety team.</p></div>
+          </div>
+          <div class="safety-card fade-up">
+            <div class="safety-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div><h3>Regular Pool Cleaning</h3><p>Daily deep cleaning outside of operating hours.</p></div>
+          </div>
+          <div class="safety-card fade-up">
+            <div class="safety-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div><h3>Child Safety Protocols</h3><p>Sign-in/sign-out and verified guardian pickup only.</p></div>
+          </div>
+          <div class="safety-card fade-up">
+            <div class="safety-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div><h3>Small Batch Sizes</h3><p>Max 1:6 coach-to-student ratio, every class.</p></div>
+          </div>
+          <div class="safety-card fade-up">
+            <div class="safety-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div><h3>Progress Evaluation</h3><p>Termly skill assessments shared with parents.</p></div>
+          </div>
+          <div class="safety-card fade-up">
+            <div class="safety-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div><h3>Attendance Tracking</h3><p>Digital check-in with automatic parent notification.</p></div>
+          </div>
+          <div class="safety-card fade-up">
+            <div class="safety-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div><h3>Professional Equipment</h3><p>Regularly inspected, competition-grade gear.</p></div>
+          </div>
+          <div class="safety-card fade-up">
+            <div class="safety-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div><h3>International Standards</h3><p>Coaching aligned to ASCA and Swim England frameworks.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 6 — ACHIEVEMENTS & MILESTONES                         -->
+    <!-- ============================================================ -->
+    <section class="section" aria-label="Achievements and milestones">
+      <div class="container">
+        <div class="section-head fade-up">
+          <p class="eyebrow eyebrow-dark">Our Journey</p>
+          <h2 class="section-title">Achievements &amp; milestones</h2>
+          <p class="section-sub">Fifteen years, thousands of swimmers, and a growing shelf of medals — here's how we got here.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-year">2010</div>
+            <div class="timeline-card"><h3>Academy Founded</h3><p>Opened with one pool and three coaches.</p></div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-year">2013</div>
+            <div class="timeline-card"><h3>First Regional Medals</h3><p>Students won 6 medals at the regional championships.</p></div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-year">2014</div>
+            <div class="timeline-card"><h3>Olympic Pool Opened</h3><p>Expanded into our current 10-lane facility.</p></div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-year">2017</div>
+            <div class="timeline-card"><h3>State-Level Winners</h3><p>12 swimmers qualified for state finals.</p></div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-year">2018</div>
+            <div class="timeline-card"><h3>International Certification</h3><p>Coaching program certified under ASCA standards.</p></div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-year">2021</div>
+            <div class="timeline-card"><h3>National Competitors</h3><p>First academy swimmers to compete nationally.</p></div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-year">2023</div>
+            <div class="timeline-card"><h3>Partner Schools Program</h3><p>Partnered with 8 local schools for swim education.</p></div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-year">2025</div>
+            <div class="timeline-card"><h3>5,000+ Students Trained</h3><p>Crossed a major milestone in students taught.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 7 — ACADEMY IN NUMBERS                                -->
+    <!-- ============================================================ -->
+    <section class="section stats-section" aria-label="Academy statistics">
+      <div class="container">
+        <div class="section-head fade-up">
+          <p class="eyebrow eyebrow-dark">By The Numbers</p>
+          <h2 class="section-title">Our academy in numbers</h2>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-block fade-up">
+            <span class="highlight-num" data-count="5000" data-suffix="+" style="color:var(--primary); font-size:clamp(28px,3vw,40px);">0</span>
+            <span class="stat-block-label">Students</span>
+          </div>
+          <div class="stat-block fade-up">
+            <span class="highlight-num" data-count="25" data-suffix="+" style="color:var(--primary); font-size:clamp(28px,3vw,40px);">0</span>
+            <span class="stat-block-label">Certified Coaches</span>
+          </div>
+          <div class="stat-block fade-up">
+            <span class="highlight-num" data-count="15" data-suffix="+" style="color:var(--primary); font-size:clamp(28px,3vw,40px);">0</span>
+            <span class="stat-block-label">Years Experience</span>
+          </div>
+          <div class="stat-block fade-up">
+            <span class="highlight-num" data-count="120" data-suffix="+" style="color:var(--primary); font-size:clamp(28px,3vw,40px);">0</span>
+            <span class="stat-block-label">Competitions</span>
+          </div>
+          <div class="stat-block fade-up">
+            <div class="stat-circle" data-percent="98">
+              <svg viewBox="0 0 120 120"><circle class="circle-bg" cx="60" cy="60" r="52"></circle><circle class="circle-fill" cx="60" cy="60" r="52"></circle></svg>
+              <div class="circle-label"><span class="circle-percent">98%</span></div>
+            </div>
+            <span class="stat-block-label">Student Satisfaction</span>
+          </div>
+          <div class="stat-block fade-up">
+            <div class="stat-circle" data-percent="100">
+              <svg viewBox="0 0 120 120"><circle class="circle-bg" cx="60" cy="60" r="52"></circle><circle class="circle-fill" cx="60" cy="60" r="52"></circle></svg>
+              <div class="circle-label"><span class="circle-percent">100%</span></div>
+            </div>
+            <span class="stat-block-label">Safety Record</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 8 — JOIN THE SWIMMING FAMILY (CTA)                    -->
+    <!-- ============================================================ -->
+    <section id="join" class="section cta-section" aria-label="Join the swimming family">
+      <div class="container">
+        <div class="cta-card fade-up">
+          <div class="cta-bg-wave" aria-hidden="true"></div>
+          <div class="cta-content">
+            <h2>Ready to Begin Your Swimming Journey?</h2>
+            <p>Join thousands of confident swimmers who started exactly where you are now. Come see the pool, meet a coach, and take your first stroke with us.</p>
+            <div class="cta-buttons">
+              <a href="index.html#contact" class="btn-primary btn-light magnetic">Enroll Now</a>
+              <a href="index.html#contact" class="btn-secondary magnetic" style="border-color: rgba(7,27,47,0.25); color:#071B2F;">Book a Free Trial</a>
+              <a href="tel:+15551234567" class="btn-call magnetic">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 3a2 2 0 0 1-.5 2.1L8 10.1a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2-.5c1 .3 2 .5 3 .7a2 2 0 0 1 1.7 2Z"/></svg>
+                <span>Contact Academy</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- FOOTER                                                        -->
+  <!-- ============================================================ -->
+  <footer class="footer">
+    <div class="container footer-grid">
+
+      <div class="footer-col footer-brand">
+        <a href="index.html#home" class="logo">
+          <svg width="34" height="34" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="19" stroke="url(#logoGrad2)" stroke-width="2"/>
+            <path d="M8 22c2-2 4-2 6 0s4 2 6 0 4-2 6 0 4 2 6 0" stroke="url(#logoGrad2)" stroke-width="2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="logoGrad2" x1="0" y1="0" x2="40" y2="40">
+                <stop offset="0%" stop-color="#00D4FF"/>
+                <stop offset="100%" stop-color="#0EA5E9"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="logo-text">CURRENT</span>
+        </a>
+        <p class="footer-about">A premium swimming academy for every age and ambition — from first splash to podium finish.</p>
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 9h3V6h-3a4 4 0 0 0-4 4v2H7v3h3v6h3v-6h3l1-3h-4v-2a1 1 0 0 1 1-1Z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M11 10l4 2-4 2v-4Z" fill="currentColor" stroke="none"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="coaches.html">Coaches</a></li>
+          <li><a href="index.html#gallery">Gallery</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="programs.html">Kids Swimming</a></li>
+          <li><a href="programs.html">Adult Swimming</a></li>
+          <li><a href="programs.html">Women's Classes</a></li>
+          <li><a href="programs.html#batch-timings">Batch Timings</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+          <li>123 Poolside Avenue, Bay City</li>
+          <li>+1 (555) 123-4567</li>
+          <li>hello@currentaquatics.com</li>
+        </ul>
+        <h4 class="mt">Working Hours</h4>
+        <ul class="footer-contact">
+          <li>Mon–Sat: 5:30 AM – 9:00 PM</li>
+          <li>Sun: 7:00 AM – 5:00 PM</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <p class="footer-about">Batch openings and swim tips, once a month.</p>
+        <form class="newsletter-form" onsubmit="return false;">
+          <label for="newsletterEmail" class="sr-only">Email address</label>
+          <input type="email" id="newsletterEmail" placeholder="Your email" required />
+          <button type="submit" aria-label="Subscribe">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Current Aquatics Academy. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
