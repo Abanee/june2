@@ -1701,10 +1701,13 @@ html.light .coach-badge { background: rgba(2, 132, 199, 0.08); border-color: rgb
   .hero-stats { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1120px) {
   .nav-links { display: none; }
   .menu-toggle { display: flex; }
   .nav-actions .btn-enroll { display: none; }
+}
+
+@media (max-width: 860px) {
   .masonry-grid { grid-template-columns: repeat(2, 1fr); }
   .highlights-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
 }
