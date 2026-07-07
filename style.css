@@ -2667,16 +2667,14 @@ html[dir="rtl"] .home-badge-dot {
 
 /* Ensure buttons inside dark page heroes always have white text/border regardless of light mode */
 .about-hero .btn-ghost-white,
-.coaches-hero .btn-ghost-white,
-.contact-hero .btn-ghost-white {
+.coaches-hero .btn-ghost-white {
   color: #fff !important;
   border-color: rgba(255, 255, 255, 0.25) !important;
   background: rgba(255, 255, 255, 0.05) !important;
 }
 
 .about-hero .btn-ghost-white:hover,
-.coaches-hero .btn-ghost-white:hover,
-.contact-hero .btn-ghost-white:hover {
+.coaches-hero .btn-ghost-white:hover {
   background: #fff !important;
   border-color: #fff !important;
   color: #071B2F !important;
