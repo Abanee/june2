@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login &amp; Sign Up — Current Aquatics Academy</title>
+  <meta name="description" content="Access your Current Aquatics Academy portal. Log in or sign up to manage your batches, schedules, and technical progress analysis." />
+
+  <!-- ============ FONTS ============ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- ============ TAILWIND CDN ============ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Poppins', 'sans-serif'],
+            body: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            'deep': '#071B2F',
+            'deep-2': '#0D2E4D',
+            'cyan': '#00D4FF',
+            'blue': '#3B82F6',
+            'sky': '#38BDF8',
+            'lt-bg': '#F6FBFF',
+            'lt-card': '#FFFFFF',
+            'lt-primary': '#0284C7',
+            'lt-secondary': '#0EA5E9',
+            'lt-accent': '#38BDF8',
+            'lt-text': '#0F172A',
+            'lt-sub': '#64748B',
+            'lt-border': '#E2E8F0',
+          },
+          borderRadius: {
+            'brand': '22px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .auth-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px;
+      position: relative;
+      background: var(--bg);
+      overflow: hidden;
+    }
+    .auth-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1571019614454-1cb2f99b2d8b?q=80&w=1600');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.08;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+    .auth-card-wrap {
+      width: 100%;
+      max-width: 460px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      padding: 40px;
+      position: relative;
+      z-index: 10;
+    }
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 11px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+      transition: all 0.25s var(--ease);
+      cursor: pointer;
+    }
+    .social-btn:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.2);
+    }
+    html.light .social-btn {
+      background: rgba(7, 27, 47, 0.02);
+      border-color: var(--border);
+    }
+    html.light .social-btn:hover {
+      background: rgba(7, 27, 47, 0.05);
+    }
+    .divider-text {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: var(--text-sub);
+      font-size: 13px;
+      font-weight: 500;
+      margin: 24px 0 20px;
+    }
+    .divider-text::before, .divider-text::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--border);
+    }
+    .divider-text:not(:empty)::before { margin-right: .5em; }
+    .divider-text:not(:empty)::after { margin-left: .5em; }
+    html[dir="rtl"] .divider-text:not(:empty)::before { margin-right: 0; margin-left: .5em; }
+    html[dir="rtl"] .divider-text:not(:empty)::after { margin-left: 0; margin-right: .5em; }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-sub);
+    }
+    .form-input {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14.5px;
+      transition: all 0.25s var(--ease);
+      font-family: inherit;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(255,255,255,0.06);
+    }
+    html.light .form-input {
+      background: #fff;
+    }
+    html.light .form-input:focus {
+      background: #fff;
+    }
+    
+    /* Password input with toggle */
+    .form-input-pass {
+      padding-right: 44px;
+    }
+    html[dir="rtl"] .form-input-pass {
+      padding-right: 16px;
+      padding-left: 44px;
+    }
+    .password-toggle-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+    }
+    .password-toggle-btn:hover {
+      color: var(--primary);
+    }
+    html[dir="rtl"] .password-toggle-btn {
+      right: auto;
+      left: 12px;
+    }
+
+    .auth-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13.5px;
+      color: var(--text-sub);
+      margin-bottom: 28px;
+    }
+    .checkbox-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .checkbox-wrap input {
+      accent-color: var(--primary);
+      width: 15px;
+      height: 15px;
+    }
+  </style>
+</head>
+<body class="font-body antialiased">
+
+  <!-- ============================================================ -->
+  <!-- FLOATING BACK BUTTON (REPLACES NAVBAR)                        -->
+  <!-- ============================================================ -->
+  <a href="index.html" class="absolute top-6 left-6 md:top-8 md:left-8 text-sm font-semibold flex items-center gap-2 text-sub hover:text-primary z-50 transition-colors" aria-label="Back to home page">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    <span>Back to Home</span>
+  </a>
+
+  <!-- ============================================================ -->
+  <!-- MAIN AUTH SECTION                                             -->
+  <!-- ============================================================ -->
+  <main id="main-content">
+    <section class="auth-section">
+      <div class="auth-bg-overlay" aria-hidden="true"></div>
+
+      <!-- Glowing blobs -->
+      <div class="absolute w-[400px] h-[400px] rounded-full blur-[120px] bg-cyan/5 -top-20 -left-20 pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute w-[400px] h-[400px] rounded-full blur-[120px] bg-blue/5 -bottom-20 -right-20 pointer-events-none" aria-hidden="true"></div>
+
+      <div class="auth-card-wrap fade-up">
+        
+        <!-- Header: Logo first, Welcome back after that -->
+        <div class="flex flex-col items-center mb-8">
+          <div class="mb-4">
+            <svg width="48" height="48" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="20" cy="20" r="19" stroke="url(#logoGrad2)" stroke-width="2.5"/>
+              <path d="M8 22c2-2 4-2 6 0s4 2 6 0 4-2 6 0 4 2 6 0" stroke="url(#logoGrad2)" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M8 16c2-2 4-2 6 0s4 2 6 0 4-2 6 0 4 2 6 0" stroke="url(#logoGrad2)" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+              <defs>
+                <linearGradient id="logoGrad2" x1="0" y1="0" x2="40" y2="40">
+                  <stop offset="0%" stop-color="#00D4FF"/>
+                  <stop offset="50%" stop-color="#2563EB"/>
+                  <stop offset="100%" stop-color="#0EA5E9"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h1 id="auth-title" class="font-display font-extrabold text-2xl text-center text-text">Welcome Back</h1>
+          <p id="auth-sub" class="text-sub text-sm text-center mt-1">Sign in to manage your academy portal</p>
+        </div>
+
+        <!-- ============ SIGN IN FORM ============ -->
+        <form id="form-login" class="auth-form" method="POST" action="#">
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email Address</label>
+            <input type="email" id="login-email" class="form-input" placeholder="name@example.com" required autocomplete="username" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password</label>
+            <div class="relative">
+              <input type="password" id="login-password" class="form-input form-input-pass" placeholder="••••••••" required autocomplete="current-password" />
+              <button type="button" class="password-toggle-btn" aria-label="Toggle password visibility">
+                <!-- Eye Open -->
+                <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <!-- Eye Closed -->
+                <svg class="eye-closed hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24M1 1l22 22"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth-footer">
+            <label class="checkbox-wrap">
+              <input type="checkbox" id="remember-me" />
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="hover:underline text-cyan" onclick="alert('Password reset link sent (Simulation)')">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="btn-primary w-full justify-center">
+            <span>Sign In</span>
+          </button>
+        </form>
+
+        <!-- ============ SIGN UP FORM ============ -->
+        <form id="form-signup" class="auth-form hidden" method="POST" action="#">
+          <div class="form-group">
+            <label class="form-label" for="signup-name">Full Name</label>
+            <input type="text" id="signup-name" class="form-input" placeholder="Your Name" required autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signup-email">Email Address</label>
+            <input type="email" id="signup-email" class="form-input" placeholder="name@example.com" required autocomplete="email" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signup-password">Password</label>
+            <div class="relative">
+              <input type="password" id="signup-password" class="form-input form-input-pass" placeholder="Minimum 8 characters" minlength="8" required autocomplete="new-password" />
+              <button type="button" class="password-toggle-btn" aria-label="Toggle password visibility">
+                <!-- Eye Open -->
+                <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <!-- Eye Closed -->
+                <svg class="eye-closed hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24M1 1l22 22"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth-footer justify-start">
+            <label class="checkbox-wrap">
+              <input type="checkbox" id="agree-terms" required />
+              <span>I agree to the <a href="#" class="text-cyan hover:underline">Terms &amp; Conditions</a></span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn-primary w-full justify-center">
+            <span>Create Account</span>
+          </button>
+        </form>
+
+        <!-- Social Logins (Google & Apple) AFTER the main login or sign up buttons -->
+        <div class="divider-text">or continue with</div>
+        <div class="flex flex-col gap-3">
+          <button class="social-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+            </svg>
+            <span>Continue with Google</span>
+          </button>
+          <button class="social-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.22.67-2.94 1.5-.64.73-1.2 1.87-1.05 2.97 1.12.09 2.27-.58 3-1.41z"/>
+            </svg>
+            <span>Continue with Apple</span>
+          </button>
+        </div>
+
+        <!-- Switcher Link -->
+        <div class="text-center mt-8 text-sm text-sub">
+          <span id="switch-text">Don't have an account?</span>
+          <button id="switch-auth-btn" class="text-cyan font-bold hover:underline ml-1 focus:outline-none">Sign Up</button>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- FOOTER                                                        -->
+  <!-- ============================================================ -->
+  <footer class="elite-footer" style="border-top: 1px solid var(--border); padding-top: 50px; padding-bottom: 40px; text-align: center; background: var(--bg);">
+    <div class="container">
+      <p class="text-sm text-sub">&copy; 2026 Current Aquatics Academy. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Toggle Auth Forms
+    const switchBtn = document.getElementById('switch-auth-btn');
+    const switchText = document.getElementById('switch-text');
+    const authTitle = document.getElementById('auth-title');
+    const authSub = document.getElementById('auth-sub');
+    const formLogin = document.getElementById('form-login');
+    const formSignup = document.getElementById('form-signup');
+    let isLogin = true;
+
+    if (switchBtn && switchText && authTitle && authSub && formLogin && formSignup) {
+      switchBtn.addEventListener('click', () => {
+        isLogin = !isLogin;
+        if (isLogin) {
+          authTitle.textContent = 'Welcome Back';
+          authSub.textContent = 'Sign in to manage your academy portal';
+          switchText.textContent = "Don't have an account?";
+          switchBtn.textContent = 'Sign Up';
+          formLogin.classList.remove('hidden');
+          formSignup.classList.add('hidden');
+        } else {
+          authTitle.textContent = 'Create Account';
+          authSub.textContent = 'Join our elite swimming academy';
+          switchText.textContent = 'Already have an account?';
+          switchBtn.textContent = 'Sign In';
+          formSignup.classList.remove('hidden');
+          formLogin.classList.add('hidden');
+        }
+      });
+    }
+
+    // Password Visibility Toggle
+    document.querySelectorAll('.password-toggle-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const input = btn.previousElementSibling;
+        const eyeOpen = btn.querySelector('.eye-open');
+        const eyeClosed = btn.querySelector('.eye-closed');
+        
+        if (input.type === 'password') {
+          input.type = 'text';
+          eyeOpen.classList.add('hidden');
+          eyeClosed.classList.remove('hidden');
+        } else {
+          input.type = 'password';
+          eyeOpen.classList.remove('hidden');
+          eyeClosed.classList.add('hidden');
+        }
+      });
+    });
+
+    // Intercept forms to simulate success
+    document.getElementById('form-login').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Logged in successfully! (Simulation)');
+    });
+    document.getElementById('form-signup').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Account created successfully! (Simulation)');
+    });
+  </script>
+</body>
+</html>

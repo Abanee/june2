@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const stored = sessionStorage.getItem('academyTheme');
     if (stored === 'light') {
       root.classList.add('light');
-      themeToggle.setAttribute('aria-pressed', 'true');
+      if (themeToggle) {
+        themeToggle.setAttribute('aria-pressed', 'true');
+      }
     }
   };
   try { applyStoredTheme(); } catch (e) { /* storage unavailable, ignore */ }
@@ -111,18 +113,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileMenu = document.getElementById('mobileMenu');
 
   const closeMenu = () => {
-    menuToggle.classList.remove('open');
-    mobileMenu.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    mobileMenu.setAttribute('aria-hidden', 'true');
+    if (menuToggle) menuToggle.classList.remove('open');
+    if (mobileMenu) mobileMenu.classList.remove('open');
+    if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+    if (mobileMenu) mobileMenu.setAttribute('aria-hidden', 'true');
   };
 
-  menuToggle.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.toggle('open');
-    menuToggle.classList.toggle('open', isOpen);
-    menuToggle.setAttribute('aria-expanded', String(isOpen));
-    mobileMenu.setAttribute('aria-hidden', String(!isOpen));
-  });
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      menuToggle.classList.toggle('open', isOpen);
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+    });
+  }
 
   document.querySelectorAll('.mobile-link, .mobile-menu .btn-enroll').forEach((link) => {
     link.addEventListener('click', closeMenu);

@@ -321,6 +321,32 @@ html.light .btn-secondary:hover {
   color: #fff;
 }
 
+.btn-login-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14.5px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), background 0.25s var(--ease), color 0.25s var(--ease);
+}
+html.light .btn-login-nav {
+  background: rgba(7, 27, 47, 0.03);
+}
+.btn-login-nav:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #071B2F;
+}
+html.light .btn-login-nav:hover {
+  color: #fff;
+}
+
 /* Ghost white button — used across all page heroes */
 .btn-ghost-white {
   display: inline-flex;
