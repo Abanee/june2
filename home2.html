@@ -68,28 +68,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-image: linear-gradient(180deg, rgba(7, 27, 47, 0.55) 0%, rgba(7, 27, 47, 0.75) 100%), url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1600');
+      background-image: url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1600');
       background-size: cover;
       background-position: center;
       overflow: hidden;
     }
     html.light .elite-hero {
-      background-image: linear-gradient(180deg, rgba(246, 251, 255, 0.6) 0%, rgba(246, 251, 255, 0.85) 100%), url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1600');
+      background-image: url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1600');
     }
-    .elite-hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-    .elite-orb-glow {
-      position: absolute;
-      width: 650px; height: 650px;
-      background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 75%);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      filter: blur(80px);
-      pointer-events: none;
+    .elite-hero #waterCanvas {
+      opacity: 1 !important;
     }
     .elite-hero-inner {
       position: relative;
@@ -714,9 +702,6 @@
     <!-- HERO SECTION                                                 -->
     <!-- ============================================================ -->
     <section class="elite-hero" aria-label="Club Elite Home">
-      <div class="elite-hero-bg">
-        <div class="elite-orb-glow" aria-hidden="true"></div>
-      </div>
       <canvas id="waterCanvas" class="hero-canvas" aria-hidden="true"></canvas>
 
       <div class="elite-hero-inner fade-up">
@@ -732,7 +717,7 @@
           </h1>
 
           <p class="elite-hero-sub">
-            A dedicated sanctuary for high-performance swimmers, triathletes, and wellness enthusiasts. Discover biometric tracking, hydrotherapy, and private chambers.
+             A dedicated sanctuary for high-performance swimmers, triathletes, and wellness enthusiasts. Discover biometric tracking, hydrotherapy, and private chambers.
           </p>
 
           <div class="flex justify-center gap-4 flex-wrap w-full">
@@ -1249,6 +1234,194 @@
         }, 3000);
       }
     }
+
+    /* ===== WATER TOUCHING RIPPLE EFFECT ===== */
+    (function() {
+      const canvas = document.getElementById('waterCanvas');
+      const hero = document.querySelector('.elite-hero');
+      if (!canvas || !hero) return;
+
+      const ctx = canvas.getContext('2d');
+      
+      // Resolution of the simulation buffer (low res for 60fps performance)
+      const simWidth = 256;
+      const simHeight = 160;
+      const size = simWidth * simHeight;
+      
+      let buffer1 = new Float32Array(size);
+      let buffer2 = new Float32Array(size);
+      
+      // Temporary canvas to load and read background image pixels
+      const tempCanvas = document.createElement('canvas');
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCanvas.width = simWidth;
+      tempCanvas.height = simHeight;
+
+      let imgData, originalPixels, outputPixels;
+      let imgLoaded = false;
+
+      // Load background image
+      const bgImg = new Image();
+      bgImg.crossOrigin = "anonymous";
+      bgImg.src = 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1600';
+      bgImg.onload = () => {
+        // Draw image stretched to our simulation size
+        tempCtx.drawImage(bgImg, 0, 0, simWidth, simHeight);
+        imgData = tempCtx.getImageData(0, 0, simWidth, simHeight);
+        
+        // Clone original pixels
+        const originalBuffer = new ArrayBuffer(imgData.data.length);
+        originalPixels = new Uint32Array(originalBuffer);
+        originalPixels.set(new Uint32Array(imgData.data.buffer));
+        
+        // Output pixels references the buffer of imgData so updates are written in place
+        outputPixels = new Uint32Array(imgData.data.buffer);
+        
+        imgLoaded = true;
+      };
+
+      // Fallback: if Unsplash CORS fails, create a beautiful procedural water grid background
+      bgImg.onerror = () => {
+        tempCtx.fillStyle = '#072e4d';
+        tempCtx.fillRect(0, 0, simWidth, simHeight);
+        
+        // Draw grid lines
+        tempCtx.strokeStyle = '#00d4ff';
+        tempCtx.lineWidth = 1;
+        for (let i = 0; i < simWidth; i += 20) {
+          tempCtx.beginPath();
+          tempCtx.moveTo(i, 0);
+          tempCtx.lineTo(i, simHeight);
+          tempCtx.stroke();
+        }
+        for (let j = 0; j < simHeight; j += 20) {
+          tempCtx.beginPath();
+          tempCtx.moveTo(0, j);
+          tempCtx.lineTo(simWidth, j);
+          tempCtx.stroke();
+        }
+        
+        imgData = tempCtx.getImageData(0, 0, simWidth, simHeight);
+        const originalBuffer = new ArrayBuffer(imgData.data.length);
+        originalPixels = new Uint32Array(originalBuffer);
+        originalPixels.set(new Uint32Array(imgData.data.buffer));
+        
+        outputPixels = new Uint32Array(imgData.data.buffer);
+        
+        imgLoaded = true;
+      };
+
+      // Add a ripple drop at (x, y)
+      function drop(x, y, radius, strength) {
+        if (!imgLoaded) return;
+        
+        // Translate screen mouse coordinates to simulation coordinates
+        const rect = hero.getBoundingClientRect();
+        const simX = Math.floor((x / rect.width) * simWidth);
+        const simY = Math.floor((y / rect.height) * simHeight);
+        
+        if (simX < radius || simX >= simWidth - radius || simY < radius || simY >= simHeight - radius) return;
+        
+        for (let dy = -radius; dy <= radius; dy++) {
+          for (let dx = -radius; dx <= radius; dx++) {
+            if (dx*dx + dy*dy < radius*radius) {
+              const idx = (simY + dy) * simWidth + (simX + dx);
+              buffer1[idx] += strength;
+            }
+          }
+        }
+      }
+
+      hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        drop(x, y, 4, 15);
+      });
+
+      hero.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+          const rect = hero.getBoundingClientRect();
+          const x = e.touches[0].clientX - rect.left;
+          const y = e.touches[0].clientY - rect.top;
+          drop(x, y, 4, 15);
+        }
+      }, { passive: true });
+
+      hero.addEventListener('click', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        drop(x, y, 8, 45);
+      });
+
+      let canvasWidth = hero.offsetWidth;
+      let canvasHeight = hero.offsetHeight;
+      
+      function resize() {
+        canvasWidth = hero.offsetWidth;
+        canvasHeight = hero.offsetHeight;
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const damping = 0.972;
+      const refractionStrength = 1.8;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        if (!imgLoaded) return;
+
+        // Wave propagation
+        for (let y = 1; y < simHeight - 1; y++) {
+          for (let x = 1; x < simWidth - 1; x++) {
+            const i = y * simWidth + x;
+            buffer2[i] = ((buffer1[i - 1] + 
+                           buffer1[i + 1] + 
+                           buffer1[i - simWidth] + 
+                           buffer1[i + simWidth]) / 2) - buffer2[i];
+            buffer2[i] *= damping;
+          }
+        }
+
+        // Render displacement refraction
+        for (let y = 0; y < simHeight; y++) {
+          for (let x = 0; x < simWidth; x++) {
+            const i = y * simWidth + x;
+            
+            if (x === 0 || x === simWidth - 1 || y === 0 || y === simHeight - 1) {
+              outputPixels[i] = originalPixels[i];
+              continue;
+            }
+
+            const xSlope = buffer2[i - 1] - buffer2[i + 1];
+            const ySlope = buffer2[i - simWidth] - buffer2[i + simWidth];
+
+            let srcX = Math.floor(x + xSlope * refractionStrength);
+            let srcY = Math.floor(y + ySlope * refractionStrength);
+
+            if (srcX < 0) srcX = 0;
+            if (srcX >= simWidth) srcX = simWidth - 1;
+            if (srcY < 0) srcY = 0;
+            if (srcY >= simHeight) srcY = simHeight - 1;
+
+            const srcIdx = srcY * simWidth + srcX;
+            outputPixels[i] = originalPixels[srcIdx];
+          }
+        }
+
+        // Swap buffers
+        const temp = buffer1;
+        buffer1 = buffer2;
+        buffer2 = temp;
+
+        tempCtx.putImageData(imgData, 0, 0);
+        ctx.drawImage(tempCanvas, 0, 0, canvasWidth, canvasHeight);
+      }
+      animate();
+    })();
   </script>
 </body>
 </html>
