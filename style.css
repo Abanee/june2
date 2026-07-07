@@ -1456,6 +1456,9 @@ html.light .why-icon { color: #fff; }
   background: var(--bg-2);
   border: 1px solid var(--border);
   transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .program-card:hover { transform: translateY(-8px); box-shadow: var(--shadow); }
 .program-img {
@@ -1485,7 +1488,12 @@ html.light .why-icon { color: #fff; }
   padding: 6px 14px;
   border-radius: 999px;
 }
-.program-body { padding: 24px; }
+.program-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
 .program-body h3 { font-size: 21px; font-weight: 600; margin-bottom: 8px; }
 .program-body p { color: var(--text-sub); font-size: 15px; line-height: 1.55; margin-bottom: 18px; }
 .program-cta {
@@ -1496,6 +1504,7 @@ html.light .why-icon { color: #fff; }
   color: var(--accent);
   font-size: 15px;
   transition: gap 0.25s var(--ease);
+  margin-top: auto;
 }
 .program-cta:hover { gap: 12px; }
 
