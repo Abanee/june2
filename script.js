@@ -5,15 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ------------------------------------------------------------------ */
-  /* 0. PRELOADER                                                       */
-  /* ------------------------------------------------------------------ */
-  const preloader = document.getElementById('preloader');
-  window.addEventListener('load', () => {
-    setTimeout(() => preloader.classList.add('hidden'), 400);
-  });
-  // Fallback in case load event already fired
-  setTimeout(() => preloader.classList.add('hidden'), 1800);
+
 
   /* ------------------------------------------------------------------ */
   /* 1. THEME TOGGLE (persists for the session)                         */
@@ -30,11 +22,48 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   try { applyStoredTheme(); } catch (e) { /* storage unavailable, ignore */ }
 
-  themeToggle.addEventListener('click', () => {
-    const isLight = root.classList.toggle('light');
-    themeToggle.setAttribute('aria-pressed', String(isLight));
-    try { sessionStorage.setItem('academyTheme', isLight ? 'light' : 'dark'); } catch (e) {}
-  });
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const isLight = root.classList.toggle('light');
+      themeToggle.setAttribute('aria-pressed', String(isLight));
+      try { sessionStorage.setItem('academyTheme', isLight ? 'light' : 'dark'); } catch (e) {}
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* 1.1 DIRECTION TOGGLE (LTR / RTL)                                   */
+  /* ------------------------------------------------------------------ */
+  const dirToggle = document.getElementById('dirToggle');
+
+  const applyStoredDir = () => {
+    const stored = sessionStorage.getItem('academyDir');
+    if (stored === 'rtl') {
+      root.setAttribute('dir', 'rtl');
+      root.classList.add('rtl');
+      if (dirToggle) {
+        dirToggle.setAttribute('aria-pressed', 'true');
+        dirToggle.innerHTML = '<span>LTR</span>';
+      }
+    } else {
+      root.setAttribute('dir', 'ltr');
+      root.classList.remove('rtl');
+      if (dirToggle) {
+        dirToggle.setAttribute('aria-pressed', 'false');
+        dirToggle.innerHTML = '<span>RTL</span>';
+      }
+    }
+  };
+  try { applyStoredDir(); } catch (e) {}
+
+  if (dirToggle) {
+    dirToggle.addEventListener('click', () => {
+      const current = root.getAttribute('dir');
+      try {
+        sessionStorage.setItem('academyDir', current === 'rtl' ? 'ltr' : 'rtl');
+      } catch (e) {}
+      applyStoredDir();
+    });
+  }
 
   /* ------------------------------------------------------------------ */
   /* 2. NAVBAR — blur/shrink on scroll + active link highlight          */
@@ -57,12 +86,23 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach((entry) => {
       if (entry.isIntersecting && entry.target.id) {
         navLinks.forEach((link) => {
-          link.classList.toggle('active-link', link.getAttribute('href') === `#${entry.target.id}`);
+          const href = link.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            link.classList.toggle('active-link', href === `#${entry.target.id}`);
+          }
         });
       }
     });
   }, { rootMargin: '-45% 0px -45% 0px' });
-  sections.forEach((s) => { if (s.id) sectionObserver.observe(s); });
+
+  // Only observe sections if the page uses hash scroll links (like index.html)
+  const hasLocalAnchors = Array.from(navLinks).some(link => {
+    const href = link.getAttribute('href');
+    return href && href.startsWith('#');
+  });
+  if (hasLocalAnchors) {
+    sections.forEach((s) => { if (s.id) sectionObserver.observe(s); });
+  }
 
   /* ------------------------------------------------------------------ */
   /* 3. MOBILE MENU                                                      */
@@ -105,36 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fadeObserver.observe(el);
   });
 
-  /* ------------------------------------------------------------------ */
-  /* 5. ANIMATED COUNTERS (hero stats + highlights)                      */
-  /* ------------------------------------------------------------------ */
-  const counters = document.querySelectorAll('[data-count]');
-  const animateCounter = (el) => {
-    const target = parseInt(el.dataset.count, 10);
-    const suffix = el.dataset.suffix || '';
-    const duration = 1600;
-    const start = performance.now();
 
-    const tick = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      // Ease-out cubic for a natural deceleration
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(eased * target) + suffix;
-      if (progress < 1) requestAnimationFrame(tick);
-      else el.textContent = target + suffix;
-    };
-    requestAnimationFrame(tick);
-  };
-
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        counterObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.4 });
-  counters.forEach((c) => counterObserver.observe(c));
 
   /* ------------------------------------------------------------------ */
   /* 6. TILT EFFECT ON "WHY CHOOSE US" CARDS                             */
@@ -373,38 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   } // end hero canvas guard
 
-  /* ------------------------------------------------------------------ */
-  /* 12. CIRCULAR PROGRESS RINGS (About page — stats section)           */
-  /* ------------------------------------------------------------------ */
-  const progressCircles = document.querySelectorAll('.stat-circle');
-  if (progressCircles.length) {
-    const RADIUS = 52;
-    const CIRC = 2 * Math.PI * RADIUS;
 
-    progressCircles.forEach((c) => {
-      const fill = c.querySelector('.circle-fill');
-      fill.style.strokeDasharray = `${CIRC}`;
-      fill.style.strokeDashoffset = `${CIRC}`;
-    });
-
-    const circleObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const percent = parseFloat(el.dataset.percent) || 0;
-          const fill = el.querySelector('.circle-fill');
-          const offset = CIRC - (percent / 100) * CIRC;
-          requestAnimationFrame(() => {
-            fill.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(0.22, 1, 0.36, 1)';
-            fill.style.strokeDashoffset = `${offset}`;
-          });
-          circleObserver.unobserve(el);
-        }
-      });
-    }, { threshold: 0.4 });
-
-    progressCircles.forEach((c) => circleObserver.observe(c));
-  }
 
   /* ------------------------------------------------------------------ */
   /* 13. TIMELINE SCROLL PROGRESS (About page — achievements timeline)  */

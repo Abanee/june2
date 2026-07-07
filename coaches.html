@@ -82,13 +82,7 @@
 
 <body class="font-body antialiased">
 
-  <!-- ============================================================ -->
-  <!-- LOADING SCREEN                                                -->
-  <!-- ============================================================ -->
-  <div id="preloader" aria-hidden="true">
-    <div class="preloader-ripple"></div>
-    <p class="preloader-text">CURRENT</p>
-  </div>
+
 
   <!-- Skip link for accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -128,6 +122,10 @@
         </ul>
 
         <div class="nav-actions">
+          <button id="dirToggle" class="dir-toggle" aria-label="Toggle text direction" aria-pressed="false">
+            <span>RTL</span>
+          </button>
+
           <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark and light mode" aria-pressed="false">
             <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
             <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>
@@ -211,35 +209,6 @@
           </div>
         </div>
 
-        <!-- RIGHT: portrait mosaic -->
-        <div class="coaches-hero-mosaic fade-left" aria-hidden="true">
-          <div class="mosaic-col col-left">
-            <div class="mosaic-img tall">
-              <img src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?q=80&w=500" alt="Coach Arjun Mehta" loading="eager"/>
-              <div class="mosaic-name">Arjun M.<br><small>Head Coach</small></div>
-            </div>
-            <div class="mosaic-img short">
-              <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=500" alt="Coach Priya Nair" loading="eager"/>
-              <div class="mosaic-name">Priya N.<br><small>Kids &amp; Women</small></div>
-            </div>
-          </div>
-          <div class="mosaic-col col-right">
-            <div class="mosaic-img short">
-              <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=500" alt="Coach Daniel Cruz" loading="lazy"/>
-              <div class="mosaic-name">Daniel C.<br><small>Adult Program</small></div>
-            </div>
-            <div class="mosaic-img tall">
-              <img src="https://images.unsplash.com/photo-1622253692010-333f2809c31d?q=80&w=500" alt="Coach Sara Kim" loading="lazy"/>
-              <div class="mosaic-name">Sara K.<br><small>Private 1:1</small></div>
-            </div>
-          </div>
-
-          <!-- Stat overlay chip -->
-          <div class="mosaic-stat-chip">
-            <span class="mosaic-stat-big">25+</span>
-            <span class="mosaic-stat-label">Elite coaches on deck</span>
-          </div>
-        </div>
 
       </div>
 
@@ -611,20 +580,20 @@
 
         <div class="stats-grid">
           <div class="stat-block fade-up">
-            <span class="highlight-num" data-count="40" data-suffix="+" style="color:var(--primary); font-size:clamp(28px,3vw,40px);">0</span>
+            <span class="highlight-num" data-count="40" data-suffix="+" style="color:var(--primary); font-size:clamp(28px,3vw,40px);">40+</span>
             <span class="stat-block-label">Coaching Certifications</span>
           </div>
           <div class="stat-block fade-up">
-            <span class="highlight-num" data-count="120" data-suffix="+" style="color:var(--primary); font-size:clamp(28px,3vw,40px);">0</span>
+            <span class="highlight-num" data-count="120" data-suffix="+" style="color:var(--primary); font-size:clamp(28px,3vw,40px);">120+</span>
             <span class="stat-block-label">Competitions Coached</span>
           </div>
           <div class="stat-block fade-up">
-            <span class="highlight-num" data-count="25" data-suffix="+" style="color:var(--primary); font-size:clamp(28px,3vw,40px);">0</span>
+            <span class="highlight-num" data-count="25" data-suffix="+" style="color:var(--primary); font-size:clamp(28px,3vw,40px);">25+</span>
             <span class="stat-block-label">Workshops &amp; Seminars</span>
           </div>
           <div class="stat-block fade-up">
             <div class="stat-circle" data-percent="100">
-              <svg viewBox="0 0 120 120"><circle class="circle-bg" cx="60" cy="60" r="52"></circle><circle class="circle-fill" cx="60" cy="60" r="52"></circle></svg>
+              <svg viewBox="0 0 120 120"><circle class="circle-bg" cx="60" cy="60" r="52"></circle><circle class="circle-fill" cx="60" cy="60" r="52" style="stroke-dasharray: 326.72; stroke-dashoffset: 0;"></circle></svg>
               <div class="circle-label"><span class="circle-percent">100%</span></div>
             </div>
             <span class="stat-block-label">CPR &amp; First Aid Certified</span>
