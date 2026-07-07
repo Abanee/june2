@@ -182,18 +182,69 @@ img { max-width: 100%; display: block; }
 .nav-actions { display: flex; align-items: center; gap: 16px; }
 
 .theme-toggle {
-  width: 40px; height: 40px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  border: 1px solid var(--border);
-  color: var(--text);
-  transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  background: rgba(0, 212, 255, 0.05);
+  color: #00D4FF;
+  transition: background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
 }
-.theme-toggle:hover { background: var(--glass); transform: rotate(15deg); }
+.theme-toggle:hover {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: #00D4FF;
+  color: #FFFFFF;
+  transform: rotate(15deg);
+}
 .icon-moon { display: none; }
 html.light .icon-sun { display: none; }
 html.light .icon-moon { display: block; }
+
+.dir-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  background: rgba(0, 212, 255, 0.05);
+  color: #00D4FF;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+.dir-toggle:hover {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: #00D4FF;
+  color: #FFFFFF;
+}
+
+html.light .dir-toggle {
+  background: rgba(2, 132, 199, 0.06);
+  border-color: rgba(2, 132, 199, 0.2);
+  color: #0284C7;
+}
+html.light .dir-toggle:hover {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: #0284C7;
+  color: #025684;
+}
+
+html.light .theme-toggle {
+  background: rgba(2, 132, 199, 0.06);
+  border-color: rgba(2, 132, 199, 0.2);
+  color: #0284C7;
+}
+html.light .theme-toggle:hover {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: #0284C7;
+  color: #025684;
+}
 
 .btn-enroll {
   background: var(--grad);
