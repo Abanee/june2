@@ -10,62 +10,67 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ------------------------------------------------------------------ */
   /* 1. THEME TOGGLE (persists for the session)                         */
   /* ------------------------------------------------------------------ */
-  const themeToggle = document.getElementById('themeToggle');
+  const themeToggles = document.querySelectorAll('.theme-toggle');
   const root = document.documentElement;
 
   const applyStoredTheme = () => {
     const stored = sessionStorage.getItem('academyTheme');
     if (stored === 'light') {
       root.classList.add('light');
-      if (themeToggle) {
-        themeToggle.setAttribute('aria-pressed', 'true');
-      }
+      themeToggles.forEach(toggle => {
+        toggle.setAttribute('aria-pressed', 'true');
+      });
+    } else {
+      root.classList.remove('light');
+      themeToggles.forEach(toggle => {
+        toggle.setAttribute('aria-pressed', 'false');
+      });
     }
   };
   try { applyStoredTheme(); } catch (e) { /* storage unavailable, ignore */ }
 
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
+  themeToggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
       const isLight = root.classList.toggle('light');
-      themeToggle.setAttribute('aria-pressed', String(isLight));
+      themeToggles.forEach(t => t.setAttribute('aria-pressed', String(isLight)));
       try { sessionStorage.setItem('academyTheme', isLight ? 'light' : 'dark'); } catch (e) {}
     });
-  }
+  });
 
   /* ------------------------------------------------------------------ */
   /* 1.1 DIRECTION TOGGLE (LTR / RTL)                                   */
   /* ------------------------------------------------------------------ */
-  const dirToggle = document.getElementById('dirToggle');
+  const dirToggles = document.querySelectorAll('.dir-toggle');
 
   const applyStoredDir = () => {
     const stored = sessionStorage.getItem('academyDir');
     if (stored === 'rtl') {
       root.setAttribute('dir', 'rtl');
       root.classList.add('rtl');
-      if (dirToggle) {
-        dirToggle.setAttribute('aria-pressed', 'true');
-        dirToggle.innerHTML = '<span>LTR</span>';
-      }
+      dirToggles.forEach(toggle => {
+        toggle.setAttribute('aria-pressed', 'true');
+        toggle.innerHTML = '<span>LTR</span>';
+      });
     } else {
       root.setAttribute('dir', 'ltr');
       root.classList.remove('rtl');
-      if (dirToggle) {
-        dirToggle.setAttribute('aria-pressed', 'false');
-        dirToggle.innerHTML = '<span>RTL</span>';
-      }
+      dirToggles.forEach(toggle => {
+        toggle.setAttribute('aria-pressed', 'false');
+        toggle.innerHTML = '<span>RTL</span>';
+      });
     }
   };
   try { applyStoredDir(); } catch (e) {}
 
-  if (dirToggle) {
-    dirToggle.addEventListener('click', () => {
+  dirToggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
       const current = root.getAttribute('dir');
       try {
         sessionStorage.setItem('academyDir', current === 'rtl' ? 'ltr' : 'rtl');
       } catch (e) {}
       applyStoredDir();
     });
-  }
+  });
 
   /* ------------------------------------------------------------------ */
   /* 2. NAVBAR — blur/shrink on scroll + active link highlight          */
