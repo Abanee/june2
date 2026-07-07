@@ -90,37 +90,29 @@
       overflow: hidden;
       background: var(--bg);
     }
-    .blog-hero-bg {
+    .blog-hero-photo {
       position: absolute;
       inset: 0;
+      background-image: url('Assets/blog_hero_banner.png');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      animation: photoKen 20s ease-in-out infinite alternate;
       z-index: 0;
-      pointer-events: none;
+      opacity: 0.28;
     }
-    .blog-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
+    html.light .blog-hero-photo {
+      opacity: 0.18;
     }
-    .blog-blob-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(0,212,255,0.13) 0%, transparent 70%);
-      top: -20%; left: -10%;
-      animation: blobFloat 14s ease-in-out infinite;
-    }
-    .blog-blob-2 {
-      width: 450px; height: 450px;
-      background: radial-gradient(circle, rgba(59,130,246,0.10) 0%, transparent 70%);
-      bottom: -15%; right: -5%;
-      animation: blobFloat 18s ease-in-out infinite reverse;
-    }
-    .blog-grid-lines {
+
+    .blog-hero-overlay {
       position: absolute;
       inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 60px 60px;
-      opacity: 0.25;
+      z-index: 1;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(7,27,47,0.78) 0%, rgba(7,27,47,0.92) 100%);
+    }
+    html.light .blog-hero-overlay {
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(246,251,255,0.80) 0%, rgba(246,251,255,0.94) 100%);
     }
 
     .blog-hero-inner {
@@ -954,11 +946,9 @@
     <!-- BLOG HERO                                                     -->
     <!-- ============================================================ -->
     <section class="blog-hero" aria-label="Blog introduction">
-      <div class="blog-hero-bg">
-        <div class="blog-blob blog-blob-1" aria-hidden="true"></div>
-        <div class="blog-blob blog-blob-2" aria-hidden="true"></div>
-        <div class="blog-grid-lines" aria-hidden="true"></div>
-      </div>
+      <!-- Photo Backdrop Banner -->
+      <div class="blog-hero-photo" role="img" aria-label="Swimming gear flat lay on deck"></div>
+      <div class="blog-hero-overlay" aria-hidden="true"></div>
       <canvas id="waterCanvas" class="hero-canvas" aria-hidden="true"></canvas>
 
       <div class="blog-hero-inner fade-up">

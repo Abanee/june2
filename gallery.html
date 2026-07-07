@@ -90,34 +90,19 @@
       background: var(--bg);
     }
 
-    /* Layered photo collage background */
-    .gallery-hero-bg {
+    /* Photo Backdrop Banner */
+    .gallery-hero-photo {
       position: absolute;
       inset: 0;
-      z-index: 0;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      gap: 4px;
-      opacity: 0.28;
-      transform: scale(1.06);
-    }
-    html.light .gallery-hero-bg { opacity: 0.15; }
-
-    .gallery-hero-tile {
+      background-image: url('Assets/gallery_hero_banner.png');
       background-size: cover;
       background-position: center;
-      filter: saturate(1.2);
-      transition: transform 12s ease-in-out;
+      transform: scale(1.05);
+      animation: photoKen 20s ease-in-out infinite alternate;
+      z-index: 0;
+      opacity: 0.28;
     }
-    .gallery-hero-tile:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1530549387789-4c1017266635?q=80&w=800'); }
-    .gallery-hero-tile:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1560090995-01632a28895b?q=80&w=800'); }
-    .gallery-hero-tile:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800'); }
-    .gallery-hero-tile:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1622108072830-a5d7fca19343?q=80&w=800'); }
-    .gallery-hero-tile:nth-child(5) { background-image: url('https://images.unsplash.com/photo-1600965962361-9035dbfd1c50?q=80&w=800'); }
-    .gallery-hero-tile:nth-child(6) { background-image: url('https://images.unsplash.com/photo-1600881333168-2ef49b341f30?q=80&w=800'); }
-    .gallery-hero-tile:nth-child(7) { background-image: url('https://images.unsplash.com/photo-1519315901367-f34ff9154487?q=80&w=800'); }
-    .gallery-hero-tile:nth-child(8) { background-image: url('https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?q=80&w=800'); }
+    html.light .gallery-hero-photo { opacity: 0.18; }
 
     /* Gradient overlay */
     .gallery-hero-overlay {
@@ -741,17 +726,8 @@
     <!-- ============================================================ -->
     <section class="gallery-hero" aria-label="Gallery hero">
 
-      <!-- Collage tile background -->
-      <div class="gallery-hero-bg" aria-hidden="true">
-        <div class="gallery-hero-tile"></div>
-        <div class="gallery-hero-tile"></div>
-        <div class="gallery-hero-tile"></div>
-        <div class="gallery-hero-tile"></div>
-        <div class="gallery-hero-tile"></div>
-        <div class="gallery-hero-tile"></div>
-        <div class="gallery-hero-tile"></div>
-        <div class="gallery-hero-tile"></div>
-      </div>
+      <!-- Photo Backdrop Banner -->
+      <div class="gallery-hero-photo" role="img" aria-label="Swimming pool water splash and caustic reflections"></div>
 
       <!-- Overlays & blobs -->
       <div class="gallery-hero-overlay" aria-hidden="true"></div>
