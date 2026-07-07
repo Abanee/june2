@@ -68,13 +68,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-image: url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1600');
+      background-image: url('./Assets/swimming\ poo.jpg');
       background-size: cover;
       background-position: center;
       overflow: hidden;
     }
     html.light .elite-hero {
-      background-image: url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1600');
+      background-image: url('./Assets/swimming\ poo.jpg');
     }
     .elite-hero #waterCanvas {
       opacity: 1 !important;
@@ -618,6 +618,7 @@
       .elite-footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
     }
   </style>
+  <link rel="shortcut icon" href="logo.png" type="image/png" />
   <link rel="icon" type="image/png" href="logo.png" />
 </head>
 <body class="font-body antialiased">
@@ -1276,7 +1277,7 @@
       // Load background image
       const bgImg = new Image();
       bgImg.crossOrigin = "anonymous";
-      bgImg.src = 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1600';
+      bgImg.src = './Assets/swimming poo.jpg';
       bgImg.onload = () => {
         // Draw image stretched to our simulation size
         tempCtx.drawImage(bgImg, 0, 0, simWidth, simHeight);

@@ -1547,9 +1547,9 @@ html.light .why-icon { color: #fff; }
 }
 .coach-card:hover { transform: translateY(-6px); }
 .coach-photo {
-  height: 240px;
+  height: 320px;
   background-size: cover;
-  background-position: center;
+  background-position: center 20%;
 }
 .coach-info { padding: 20px; position: relative; }
 .coach-info h3 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
@@ -1939,6 +1939,9 @@ html.light .coach-badge { background: rgba(2, 132, 199, 0.08); border-color: rgb
   backdrop-filter: blur(14px);
   overflow: hidden;
   transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .mvv-card::before {
   content: "";

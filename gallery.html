@@ -100,9 +100,9 @@
       transform: scale(1.05);
       animation: photoKen 20s ease-in-out infinite alternate;
       z-index: 0;
-      opacity: 0.28;
+      opacity: 0.85;
     }
-    html.light .gallery-hero-photo { opacity: 0.18; }
+    html.light .gallery-hero-photo { opacity: 0.75; }
 
     /* Gradient overlay */
     .gallery-hero-overlay {
@@ -110,10 +110,10 @@
       inset: 0;
       z-index: 1;
       background:
-        radial-gradient(ellipse 80% 80% at 50% 50%, rgba(7,27,47,0.78) 0%, rgba(7,27,47,0.92) 100%);
+        radial-gradient(ellipse 80% 80% at 50% 50%, rgba(7,27,47,0.3) 0%, rgba(7,27,47,0.6) 100%);
     }
     html.light .gallery-hero-overlay {
-      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(246,251,255,0.80) 0%, rgba(246,251,255,0.94) 100%);
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(246,251,255,0.3) 0%, rgba(246,251,255,0.6) 100%);
     }
 
     /* Animated blobs */
@@ -640,6 +640,7 @@
       .gallery-filter-tabs { flex-wrap: wrap; border-radius: 16px; }
     }
   </style>
+  <link rel="shortcut icon" href="logo.png" type="image/png" />
   <link rel="icon" type="image/png" href="logo.png" />
 </head>
 <body class="font-body antialiased">
@@ -773,10 +774,10 @@
       </div>
 
       <!-- Scroll hint -->
-      <div class="gallery-scroll-hint" role="button" aria-label="Scroll to gallery" onclick="document.getElementById('gallery-grid-section').scrollIntoView({behavior:'smooth'})">
+      <!-- <div class="gallery-scroll-hint" role="button" aria-label="Scroll to gallery" onclick="document.getElementById('gallery-grid-section').scrollIntoView({behavior:'smooth'})">
         <div class="gallery-scroll-arrow"><span></span></div>
         Scroll to Gallery
-      </div>
+      </div> -->
     </section>
 
     <!-- ============================================================ -->
@@ -835,8 +836,8 @@
           </article>
 
           <!-- Card 3 — Facility -->
-          <article class="gallery-card" data-category="facility" data-title="Olympic Pool Overview" data-desc="Aerial view of our 10-lane, 50m Olympic-standard heated pool — the heart of Current Aquatics Academy." data-img="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1400" role="button" tabindex="0" aria-label="View photo: Olympic Pool Overview">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=700" alt="Overhead view of Olympic swimming pool with lane markings" />
+          <article class="gallery-card" data-category="facility" data-title="Olympic Pool Overview" data-desc="Aerial view of our 10-lane, 50m Olympic-standard heated pool — the heart of Current Aquatics Academy." data-img=scr"./Assets/galleryoly.jpg" role="button" tabindex="0" aria-label="View photo: Olympic Pool Overview">
+            <img loading="lazy" src="./Assets/galleryoly.jpg" alt="Overhead view of Olympic swimming pool with lane markings" />
             <span class="gallery-card-cat">Facility</span>
             <div class="gallery-card-expand" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
@@ -875,7 +876,7 @@
 
           <!-- Card 6 — Training -->
           <article class="gallery-card" data-category="training" data-title="Private Coaching Session" data-desc="A 1-on-1 private coaching session focused on stroke technique correction at the poolside." data-img="https://images.unsplash.com/photo-1600881333168-2ef49b341f30?q=80&w=1400" role="button" tabindex="0" aria-label="View photo: Private Coaching Session">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1600881333168-2ef49b341f30?q=80&w=700" alt="Private 1-on-1 coaching session at the poolside" />
+            <img loading="lazy" src="./Assets/gallery private.jpg" alt="Private 1-on-1 coaching session at the poolside" />
             <span class="gallery-card-cat">Training</span>
             <div class="gallery-card-expand" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
@@ -940,7 +941,7 @@
 
           <!-- Card 11 — Events (wide) -->
           <article class="gallery-card" data-category="events" data-title="Batch Graduation Day" data-desc="Students from our Kids and Adult programs celebrate completing their first swimming module with certificates and cheers." data-img="https://images.unsplash.com/photo-1622253692010-333f2809c31d?q=80&w=1400" role="button" tabindex="0" aria-label="View photo: Batch Graduation Day">
-            <img loading="lazy" src="./Assets/celebartion.jpg" alt="Students celebrating batch graduation with certificates at the pool" />
+            <img loading="lazy" src="./Assets/gallertcelebartion.jpg  " alt="Students celebrating batch graduation with certificates at the pool" />
             <span class="gallery-card-cat">Events</span>
             <div class="gallery-card-expand" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
