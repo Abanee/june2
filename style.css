@@ -1624,6 +1624,7 @@ html.light .coach-badge { background: rgba(2, 132, 199, 0.08); border-color: rgb
 .testimonial-meta {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 6px 14px;
   margin: 10px 0 16px;
   font-size: 12.5px;
@@ -2602,17 +2603,8 @@ html.light .journey-track.in-view .journey-icon { color: #fff; }
   .journey-line { display: none; }
 }
 
-@media (max-width: 860px) {
-  .batch-toolbar { flex-direction: column; align-items: stretch; }
-  .batch-tabs { justify-content: center; }
-  .batch-filters { justify-content: center; }
-}
-
-@media (max-width: 640px) {
-  .levels-rail, .pricing-grid { grid-template-columns: 1fr; }
-  .journey-track { grid-template-columns: repeat(2, 1fr); }
-
-  /* Batch table collapses into stacked cards on mobile */
+@media (max-width: 992px) {
+  /* Batch table collapses into stacked cards on tablet & mobile */
   .batch-table thead { display: none; }
   .batch-table, .batch-table tbody, .batch-table tr, .batch-table td { display: block; width: 100%; }
   .batch-table tbody tr {
@@ -2636,6 +2628,17 @@ html.light .journey-track.in-view .journey-icon { color: #fff; }
     letter-spacing: 0.05em;
     color: var(--primary);
   }
+}
+
+@media (max-width: 860px) {
+  .batch-toolbar { flex-direction: column; align-items: stretch; }
+  .batch-tabs { justify-content: center; }
+  .batch-filters { justify-content: center; }
+}
+
+@media (max-width: 640px) {
+  .levels-rail, .pricing-grid { grid-template-columns: 1fr; }
+  .journey-track { grid-template-columns: repeat(2, 1fr); }
 }
 
 
@@ -2758,5 +2761,125 @@ html.light .elite-badge {
   .quote {
     font-size: 16px;
     margin-bottom: 20px;
+  }
+}
+
+/* Premium Coaching Expertise Cards */
+.expertise-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+.expertise-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 212, 255, 0.3);
+  box-shadow: var(--shadow);
+}
+.expertise-photo {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.expertise-icon-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--grad);
+  color: #071B2F;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+html.light .expertise-icon-badge {
+  color: #fff;
+}
+.expertise-info {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.expertise-info h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+.expertise-info p {
+  font-size: 14px;
+  color: var(--text-sub);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+.expertise-meta {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-sub);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Mobile (360px) Layout & Alignment Adjustments */
+@media (max-width: 480px) {
+  /* Hero section statistics 2x2 layout */
+  .home-stat-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px 0 !important;
+    padding-top: 24px !important;
+  }
+  .home-stat-divider {
+    display: none !important;
+  }
+  .home-stat-item {
+    padding: 0 !important;
+    text-align: center !important;
+  }
+  .home-stat-item:first-child {
+    padding-left: 0 !important;
+  }
+
+  /* Highlights grid labels alignment */
+  .highlight-label {
+    display: block !important;
+    min-height: 44px !important;
+  }
+
+  /* Programs page batch timings filter swipeable tabs */
+  .batch-tabs {
+    display: flex !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+    justify-content: flex-start !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+  .batch-tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+  .batch-tab {
+    flex-shrink: 0 !important;
+    padding: 8px 14px !important;
+    font-size: 13px !important;
+  }
+
+  /* Journey timeline steps vertical stack */
+  .journey-track {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
   }
 }
