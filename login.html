@@ -209,6 +209,28 @@
       width: 15px;
       height: 15px;
     }
+    .auth-controls {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    html[dir="rtl"] .auth-controls {
+      right: auto;
+      left: 24px;
+    }
+    @media (max-width: 640px) {
+      .auth-controls {
+        top: 16px;
+        right: 16px;
+      }
+      html[dir="rtl"] .auth-controls {
+        left: 16px;
+      }
+    }
   </style>
 </head>
 <body class="font-body antialiased">
@@ -223,6 +245,26 @@
     </svg>
     <span>Back to Home</span>
   </a>
+
+  <div class="auth-controls" aria-label="Page settings">
+    <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="Toggle theme">
+      <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"></circle>
+        <path d="M12 1v2"></path>
+        <path d="M12 21v2"></path>
+        <path d="M4.22 4.22l1.42 1.42"></path>
+        <path d="M18.36 18.36l1.42 1.42"></path>
+        <path d="M1 12h2"></path>
+        <path d="M21 12h2"></path>
+        <path d="M4.22 19.78l1.42-1.42"></path>
+        <path d="M18.36 5.64l1.42-1.42"></path>
+      </svg>
+      <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+      </svg>
+    </button>
+    <button id="dir-toggle-btn" class="dir-toggle" type="button" aria-label="Toggle text direction">RTL</button>
+  </div>
 
   <!-- ============================================================ -->
   <!-- MAIN AUTH SECTION                                             -->
@@ -351,6 +393,43 @@
 
   <script src="script.js"></script>
   <script>
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const dirToggleBtn = document.getElementById('dir-toggle-btn');
+    const htmlRoot = document.documentElement;
+
+    const savedTheme = localStorage.getItem('auth-theme');
+    const savedDir = localStorage.getItem('auth-dir');
+
+    if (savedTheme === 'light') {
+      htmlRoot.classList.add('light');
+    }
+
+    if (savedDir === 'rtl') {
+      htmlRoot.setAttribute('dir', 'rtl');
+      if (dirToggleBtn) dirToggleBtn.textContent = 'LTR';
+    } else {
+      htmlRoot.setAttribute('dir', 'ltr');
+      if (dirToggleBtn) dirToggleBtn.textContent = 'RTL';
+    }
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        htmlRoot.classList.toggle('light');
+        const isLight = htmlRoot.classList.contains('light');
+        localStorage.setItem('auth-theme', isLight ? 'light' : 'dark');
+      });
+    }
+
+    if (dirToggleBtn) {
+      dirToggleBtn.addEventListener('click', () => {
+        const isRtl = htmlRoot.getAttribute('dir') === 'rtl';
+        const nextDir = isRtl ? 'ltr' : 'rtl';
+        htmlRoot.setAttribute('dir', nextDir);
+        dirToggleBtn.textContent = nextDir === 'rtl' ? 'LTR' : 'RTL';
+        localStorage.setItem('auth-dir', nextDir);
+      });
+    }
+
     // Toggle Auth Forms
     const switchBtn = document.getElementById('switch-auth-btn');
     const switchText = document.getElementById('switch-text');
