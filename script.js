@@ -192,48 +192,107 @@ document.addEventListener('DOMContentLoaded', () => {
   /* 8. TESTIMONIAL CAROUSEL (auto-play + manual controls)               */
   /* ------------------------------------------------------------------ */
   const track = document.getElementById('testimonialTrack');
-  const cards = track ? Array.from(track.children) : [];
+  const originalCards = track ? Array.from(track.children) : [];
   const dotsWrap = document.getElementById('carouselDots');
   const prevBtn = document.getElementById('carouselPrev');
   const nextBtn = document.getElementById('carouselNext');
-  let current = 0;
+  let current = 1;
   let autoplayId = null;
+  let isTransitioning = false;
 
-  if (track && cards.length) {
-    cards.forEach((_, i) => {
+  if (track && originalCards.length) {
+    // Clone first and last slides for seamless infinite loop
+    const firstClone = originalCards[0].cloneNode(true);
+    const lastClone = originalCards[originalCards.length - 1].cloneNode(true);
+    
+    firstClone.classList.add('clone');
+    lastClone.classList.add('clone');
+    
+    track.appendChild(firstClone);
+    track.insertBefore(lastClone, originalCards[0]);
+    
+    const cards = Array.from(track.children);
+    
+    originalCards.forEach((_, i) => {
       const dot = document.createElement('button');
       dot.setAttribute('role', 'tab');
       dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
       if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => goTo(i));
+      dot.addEventListener('click', () => {
+        if (isTransitioning) return;
+        goTo(i + 1);
+      });
       dotsWrap.appendChild(dot);
     });
 
-    function update() {
+    function update(useTransition = true) {
+      if (useTransition) {
+        track.style.transition = 'transform 0.6s var(--ease)';
+      } else {
+        track.style.transition = 'none';
+      }
       track.style.transform = `translateX(-${current * 100}%)`;
-      dotsWrap.querySelectorAll('button').forEach((d, i) => d.classList.toggle('active', i === current));
+      
+      let dotIndex = current - 1;
+      if (current === 0) {
+        dotIndex = originalCards.length - 1;
+      } else if (current === cards.length - 1) {
+        dotIndex = 0;
+      }
+      dotsWrap.querySelectorAll('button').forEach((d, i) => d.classList.toggle('active', i === dotIndex));
     }
 
     function goTo(index) {
-      current = (index + cards.length) % cards.length;
-      update();
+      if (isTransitioning) return;
+      if (current === index) return;
+      isTransitioning = true;
+      current = index;
+      update(true);
     }
 
+    track.addEventListener('transitionend', (e) => {
+      if (e.propertyName !== 'transform') return;
+      isTransitioning = false;
+      if (current === 0) {
+        current = cards.length - 2;
+        update(false);
+      } else if (current === cards.length - 1) {
+        current = 1;
+        update(false);
+      }
+    });
+
     function startAutoplay() {
-      autoplayId = setInterval(() => goTo(current + 1), 5000);
+      autoplayId = setInterval(() => {
+        if (!isTransitioning) {
+          goTo(current + 1);
+        }
+      }, 5000);
     }
     function stopAutoplay() {
       clearInterval(autoplayId);
     }
 
-    prevBtn.addEventListener('click', () => { goTo(current - 1); stopAutoplay(); startAutoplay(); });
-    nextBtn.addEventListener('click', () => { goTo(current + 1); stopAutoplay(); startAutoplay(); });
+    prevBtn.addEventListener('click', () => {
+      if (isTransitioning) return;
+      stopAutoplay();
+      goTo(current - 1);
+      startAutoplay();
+    });
+    nextBtn.addEventListener('click', () => {
+      if (isTransitioning) return;
+      stopAutoplay();
+      goTo(current + 1);
+      startAutoplay();
+    });
 
     const carouselEl = document.getElementById('testimonialCarousel');
-    carouselEl.addEventListener('mouseenter', stopAutoplay);
-    carouselEl.addEventListener('mouseleave', startAutoplay);
+    if (carouselEl) {
+      carouselEl.addEventListener('mouseenter', stopAutoplay);
+      carouselEl.addEventListener('mouseleave', startAutoplay);
+    }
 
-    update();
+    update(false);
     startAutoplay();
   }
 

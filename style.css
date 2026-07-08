@@ -1555,10 +1555,16 @@ html.light .why-icon { color: #fff; }
   transition: transform 0.35s var(--ease);
 }
 .coach-card:hover { transform: translateY(-6px); }
+.coach-photo-some{
+  height: 320px;
+  background-size: cover;
+  background-position: center;
+
+}
 .coach-photo {
   height: 320px;
   background-size: cover;
-  background-position: center 20%;
+  background-position: center 9%;
 }
 .coach-info { padding: 20px; position: relative; }
 .coach-info h3 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
@@ -2136,7 +2142,13 @@ html.light .safety-check { color: #fff; }
   max-width: 960px;
   margin: 0 auto;
 }
-.stat-block { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.stat-block {
+  display: grid;
+  grid-template-rows: 128px auto;
+  align-items: center;
+  justify-items: center;
+  gap: 12px;
+}
 .stat-circle { position: relative; width: 128px; height: 128px; }
 .stat-circle svg { width: 100%; height: 100%; transform: rotate(-90deg); }
 .circle-bg { fill: none; stroke: var(--border); stroke-width: 8; }
@@ -2732,5 +2744,19 @@ html.light .elite-badge {
 @media (min-width: 421px) {
   .mobile-menu-toggles {
     display: none !important;
+  }
+}
+
+/* Responsive adjustment for Testimonials slider alignment in all modes */
+@media (max-width: 768px) {
+  .testimonial-carousel {
+    overflow: hidden;
+  }
+  .testimonial-card {
+    padding: 32px 20px;
+  }
+  .quote {
+    font-size: 16px;
+    margin-bottom: 20px;
   }
 }
