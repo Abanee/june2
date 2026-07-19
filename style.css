@@ -1,40 +1,67 @@
 /* ==========================================================================
-   CURRENT AQUATICS ACADEMY — HOME PAGE STYLES
-   Design system: 22px radius, glassmorphism, gradient accents, wave motifs.
+   CURRENT AQUATICS ACADEMY — STYLESHEET
+   Design system: 22px radius, premium glassmorphism, gradient accents, responsive typography.
    ========================================================================== */
 
 /* ---------- Design Tokens ---------- */
 :root {
-  /* Dark theme (default) */
-  --bg: #071B2F;
-  --bg-2: #0D2E4D;
-  --glass: rgba(18, 55, 95, 0.65);
-  --primary: #00D4FF;
-  --secondary: #3B82F6;
-  --accent: #38BDF8;
-  --grad: linear-gradient(135deg, #00D4FF 0%, #40a1f6 50%, #00D4FF 100%);
+  /* Dark theme (default) - Deep Ocean Luxury */
+  --bg: #051329;
+  --bg-2: #0a2246;
+  --glass: rgba(10, 34, 70, 0.65);
+  --primary: #00E5FF;
+  --secondary: #2979FF;
+  --accent: #00B0FF;
+  --grad: linear-gradient(135deg, #00E5FF 0%, #2979FF 50%, #00E5FF 100%);
   --text: #FFFFFF;
   --text-sub: #B8D4F0;
   --border: rgba(255, 255, 255, 0.08);
-  --glow: 0 0 40px rgba(0, 212, 255, 0.35);
-  --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  --glow: 0 0 40px rgba(0, 229, 255, 0.25);
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
   --radius: 22px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html.light {
-  --bg: #F6FBFF;
+  /* Light theme - Clear Pool Freshness */
+  --bg: #F4F8FC;
   --bg-2: #FFFFFF;
-  --glass: rgba(255, 255, 255, 0.7);
-  --primary: #0284C7;
-  --secondary: #0EA5E9;
-  --accent: #38BDF8;
-  --grad: linear-gradient(135deg, #0284C7 0%, #0EA5E9 55%, #38BDF8 100%);
-  --text: #0F172A;
-  --text-sub: #334155;
-  --border: #E2E8F0;
-  --glow: 0 0 40px rgba(2, 132, 199, 0.15);
-  --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+  --glass: rgba(255, 255, 255, 0.75);
+  --primary: #0077C2;
+  --secondary: #005b9f;
+  --accent: #00b0ff;
+  --grad: linear-gradient(135deg, #0077C2 0%, #00b0ff 100%);
+  --text: #0B1E36;
+  --text-sub: #4B6584;
+  --border: rgba(11, 30, 54, 0.08);
+  --glow: 0 0 40px rgba(0, 119, 194, 0.12);
+  --shadow: 0 20px 40px rgba(11, 30, 54, 0.05);
+}
+
+/* Custom Scrollbar for Premium Feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-2);
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Premium Glassmorphic Container */
+.glass-premium {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: var(--shadow);
 }
 
 * {
@@ -4396,6 +4423,10 @@ html.light .expertise-icon-badge {
     scrollbar-width: none !important;
   }
 
+  .batch-table-wrap {
+    overflow-x: auto !important;
+  }
+
   .batch-tabs::-webkit-scrollbar {
     display: none !important;
   }
@@ -4494,8 +4525,7 @@ html.light #elite-cta .btn-secondary:hover {
   color: #071B2F !important;
 }
 
-/* Standardize all paragraph elements, hero subheadings, and section subheadings across all pages */
-p,
+/* Standardize hero subheadings and section subheadings across all pages */
 .home-hero-sub,
 .about-hero-sub,
 .programs-hero-sub,
@@ -4505,8 +4535,9 @@ p,
 .blog-hero-sub,
 .elite-hero-sub,
 .section-sub {
-  font-size: 20px !important;
+  font-size: clamp(16px, 1.25vw, 19px) !important;
   line-height: 1.65 !important;
+  color: var(--text-sub) !important;
 }
 
 /* Centering and layout rules for hero subheadings */
@@ -4521,14 +4552,16 @@ p,
   max-width: 640px !important;
   margin-left: auto !important;
   margin-right: auto !important;
+  margin-bottom: 32px !important;
 }
 
-/* Global Font Size Increase (Scales all Tailwind rems and vanilla text) */
+/* Global Font Settings (Clean hierarchy) */
 html {
-  font-size: 17.5px !important; /* Increase root base size (originally 16px) */
+  font-size: 16px;
 }
 body {
-  font-size: 17.5px !important; /* Increase body size */
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 /* Standardize hero title font sizes across all pages */
@@ -4539,8 +4572,8 @@ body {
 .gallery-hero-title,
 .contact-hero-title,
 .blog-hero-title {
-  font-size: clamp(42px, 5.5vw, 80px) !important;
+  font-size: clamp(38px, 5vw, 76px) !important;
   font-weight: 800 !important;
-  line-height: 1.05 !important;
+  line-height: 1.1 !important;
   letter-spacing: -0.03em !important;
 }

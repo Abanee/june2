@@ -111,6 +111,22 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach((s) => { if (s.id) sectionObserver.observe(s); });
   }
 
+  // Dynamic active link highlighting based on current URL path
+  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPath) {
+      link.classList.add('active-link');
+      link.setAttribute('aria-current', 'page');
+    } else {
+      // Clear incorrect active states
+      if (currentPath !== 'index.html' && href && (href.startsWith('index.html#') || href === '#home')) {
+        link.classList.remove('active-link');
+        link.removeAttribute('aria-current');
+      }
+    }
+  });
+
   /* ------------------------------------------------------------------ */
   /* 3. MOBILE MENU                                                      */
   /* ------------------------------------------------------------------ */
