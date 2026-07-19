@@ -17,11 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const stored = sessionStorage.getItem('academyTheme');
     if (stored === 'light') {
       root.classList.add('light');
+      root.classList.remove('dark');
       themeToggles.forEach(toggle => {
         toggle.setAttribute('aria-pressed', 'true');
       });
     } else {
       root.classList.remove('light');
+      root.classList.add('dark');
       themeToggles.forEach(toggle => {
         toggle.setAttribute('aria-pressed', 'false');
       });
@@ -32,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   themeToggles.forEach(toggle => {
     toggle.addEventListener('click', () => {
       const isLight = root.classList.toggle('light');
+      root.classList.toggle('dark', !isLight);
       themeToggles.forEach(t => t.setAttribute('aria-pressed', String(isLight)));
       try { sessionStorage.setItem('academyTheme', isLight ? 'light' : 'dark'); } catch (e) {}
     });

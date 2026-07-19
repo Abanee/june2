@@ -4507,22 +4507,31 @@ html.light .home-stat-divider {
   background: rgba(7, 27, 47, 0.15) !important;
 }
 
-html.light #elite-testimonials,
-html.light #elite-cta {
-  --text: #FFFFFF;
-  --text-sub: #B8D4F0;
-  --border: rgba(255, 255, 255, 0.08);
-  --glass: rgba(18, 55, 95, 0.65);
+
+
+/* Center solo safety card on tablet screen widths */
+@media (max-width: 1100px) and (min-width: 641px) {
+  .safety-grid .safety-card:last-child {
+    grid-column: span 2;
+    justify-self: center;
+    max-width: calc(50% - 10px);
+    width: 100%;
+  }
 }
 
-html.light #elite-cta .btn-secondary {
-  border-color: rgba(255, 255, 255, 0.25) !important;
-  color: #FFFFFF !important;
-}
-
-html.light #elite-cta .btn-secondary:hover {
-  background: #FFFFFF !important;
-  color: #071B2F !important;
+/* Premium Dark Mode Card Hover Glows */
+html:not(.light) .why-card:hover,
+html:not(.light) .program-card:hover,
+html:not(.light) .coach-card:hover,
+html:not(.light) .mvv-card:hover,
+html:not(.light) .facility-card:hover,
+html:not(.light) .safety-card:hover,
+html:not(.light) .chamber-card:hover,
+html:not(.light) .faq-card:hover,
+html:not(.light) .price-card:hover {
+  transform: translateY(-6px) !important;
+  border-color: rgba(0, 229, 255, 0.35) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 30px rgba(0, 229, 255, 0.15) !important;
 }
 
 /* Standardize hero subheadings and section subheadings across all pages */
@@ -4576,4 +4585,12 @@ body {
   font-weight: 800 !important;
   line-height: 1.1 !important;
   letter-spacing: -0.03em !important;
+}
+
+/* Fix stats numbers contrast in dark mode for gallery and blog heroes */
+html:not(.light) .gallery-stat-num,
+html:not(.light) .blog-stat-num {
+  background: none !important;
+  -webkit-text-fill-color: var(--primary) !important;
+  color: var(--primary) !important;
 }
