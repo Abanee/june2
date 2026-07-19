@@ -6007,6 +6007,25 @@ html.light .acad-hero-wave { background: var(--bg); }
     padding: 150px 32px 90px;
     gap: 36px;
   }
+  .acad-hero-left {
+    align-items: center;
+    text-align: center;
+  }
+  .acad-badge {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .acad-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .acad-cta-row {
+    justify-content: center;
+  }
+  .acad-stats-strip {
+    justify-content: center;
+    width: 100%;
+  }
   .acad-hero-right { align-items: stretch; }
   .acad-trust-chip { align-self: flex-start; }
   .acad-headline { font-size: clamp(40px, 7vw, 66px); }

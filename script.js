@@ -924,4 +924,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })();
 
+/* ==========================================================================
+   R7. HERO STATS COUNTING ANIMATION
+   ========================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  const countStats = document.querySelectorAll('.acad-stat-num[data-count]');
+  if (!countStats.length) return;
+
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-count'), 10);
+        const suffix = el.getAttribute('data-suffix') || '';
+        const duration = 2000; // 2 seconds animation
+        let startTime = null;
+
+        function animate(timestamp) {
+          if (!startTime) startTime = timestamp;
+          const progress = Math.min((timestamp - startTime) / duration, 1);
+          
+          // Cubic ease-out calculation
+          const easeOutValue = 1 - Math.pow(1 - progress, 3);
+          const currentCount = Math.floor(easeOutValue * target);
+          
+          el.textContent = currentCount + suffix;
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            el.textContent = target + suffix;
+          }
+        }
+
+        requestAnimationFrame(animate);
+        countObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  countStats.forEach(stat => countObserver.observe(stat));
+});
+
+
 
