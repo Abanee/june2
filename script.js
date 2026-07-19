@@ -192,38 +192,40 @@ document.addEventListener('DOMContentLoaded', () => {
   /* 8. TESTIMONIAL CAROUSEL (auto-play + manual controls)               */
   /* ------------------------------------------------------------------ */
   const track = document.getElementById('testimonialTrack');
-  const originalCards = track ? Array.from(track.children) : [];
+  const cards = track ? Array.from(track.children) : [];
   const dotsWrap = document.getElementById('carouselDots');
   const prevBtn = document.getElementById('carouselPrev');
   const nextBtn = document.getElementById('carouselNext');
-  let current = 1;
+  let current = 0; // Starts at 0, no clones!
   let autoplayId = null;
   let isTransitioning = false;
 
-  if (track && originalCards.length) {
-    // Clone first and last slides for seamless infinite loop
-    const firstClone = originalCards[0].cloneNode(true);
-    const lastClone = originalCards[originalCards.length - 1].cloneNode(true);
-    
-    firstClone.classList.add('clone');
-    lastClone.classList.add('clone');
-    
-    track.appendChild(firstClone);
-    track.insertBefore(lastClone, originalCards[0]);
-    
-    const cards = Array.from(track.children);
-    
-    originalCards.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.setAttribute('role', 'tab');
-      dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => {
-        if (isTransitioning) return;
-        goTo(i + 1);
-      });
-      dotsWrap.appendChild(dot);
-    });
+  if (track && cards.length) {
+    const getVisibleCardsCount = () => {
+      if (window.innerWidth > 1024) return 3;
+      if (window.innerWidth > 768) return 2;
+      return 1;
+    };
+
+    const getPagesCount = () => {
+      return Math.max(1, cards.length - getVisibleCardsCount() + 1);
+    };
+
+    // Create dots dynamically based on the number of states
+    const createDots = () => {
+      dotsWrap.innerHTML = '';
+      const pages = getPagesCount();
+      for (let i = 0; i < pages; i++) {
+        const dot = document.createElement('button');
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', `Go to testimonial page ${i + 1}`);
+        if (i === current) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          goTo(i);
+        });
+        dotsWrap.appendChild(dot);
+      }
+    };
 
     function update(useTransition = true) {
       if (useTransition) {
@@ -231,42 +233,50 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         track.style.transition = 'none';
       }
-      track.style.transform = `translateX(-${current * 100}%)`;
       
-      let dotIndex = current - 1;
-      if (current === 0) {
-        dotIndex = originalCards.length - 1;
-      } else if (current === cards.length - 1) {
-        dotIndex = 0;
-      }
-      dotsWrap.querySelectorAll('button').forEach((d, i) => d.classList.toggle('active', i === dotIndex));
+      const pages = getPagesCount();
+      
+      // Clamp current index to valid bounds
+      if (current < 0) current = 0;
+      if (current >= pages) current = pages - 1;
+
+      const cardWidth = cards[0].getBoundingClientRect().width;
+      const gap = window.innerWidth > 768 ? 24 : 0;
+      const translation = current * (cardWidth + gap);
+      
+      track.style.transform = `translateX(-${translation}px)`;
+
+      // Update active dots
+      const dots = dotsWrap.querySelectorAll('button');
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
     }
 
     function goTo(index) {
-      if (isTransitioning) return;
-      if (current === index) return;
-      isTransitioning = true;
-      current = index;
+      const pages = getPagesCount();
+      // Handle wrapping
+      if (index < 0) {
+        current = pages - 1;
+      } else if (index >= pages) {
+        current = 0;
+      } else {
+        current = index;
+      }
       update(true);
     }
 
-    track.addEventListener('transitionend', (e) => {
-      if (e.propertyName !== 'transform') return;
-      isTransitioning = false;
-      if (current === 0) {
-        current = cards.length - 2;
-        update(false);
-      } else if (current === cards.length - 1) {
-        current = 1;
-        update(false);
-      }
+    // Initialize dots
+    createDots();
+    update(false);
+
+    // Re-initialize dots and position on resize
+    window.addEventListener('resize', () => {
+      createDots();
+      update(false);
     });
 
     function startAutoplay() {
       autoplayId = setInterval(() => {
-        if (!isTransitioning) {
-          goTo(current + 1);
-        }
+        goTo(current + 1);
       }, 5000);
     }
     function stopAutoplay() {
@@ -274,13 +284,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     prevBtn.addEventListener('click', () => {
-      if (isTransitioning) return;
       stopAutoplay();
       goTo(current - 1);
       startAutoplay();
     });
     nextBtn.addEventListener('click', () => {
-      if (isTransitioning) return;
       stopAutoplay();
       goTo(current + 1);
       startAutoplay();
@@ -292,7 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
       carouselEl.addEventListener('mouseleave', startAutoplay);
     }
 
-    update(false);
     startAutoplay();
   }
 

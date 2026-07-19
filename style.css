@@ -1866,7 +1866,7 @@ html.light .prog-cat-icon {
 
 .section-sub {
   color: var(--text-sub);
-  font-size: 17px;
+  font-size: 20px;
   line-height: 1.6;
 }
 
@@ -2237,8 +2237,9 @@ html.light .coach-badge {
 
 .testimonial-carousel {
   position: relative;
-  max-width: 760px;
+  max-width: 1200px; /* Expands to fit 3 cards on desktop */
   margin: 0 auto;
+  overflow: hidden; /* Hides overflowing cards on all screens */
 }
 
 .testimonial-track {
@@ -2247,16 +2248,39 @@ html.light .coach-badge {
 }
 
 .testimonial-card {
-  flex: 0 0 100%;
+  flex: 0 0 100%; /* Default for mobile */
   background: var(--glass);
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  background-clip: padding-box;
   box-shadow: inset 0 0 0 1px var(--border);
   border-radius: var(--radius);
   padding: 44px;
   backdrop-filter: blur(14px);
   text-align: center;
+  transition: transform 0.4s var(--ease);
+}
+
+/* Responsive testimonial card widths */
+@media (min-width: 1025px) {
+  .testimonial-card {
+    flex: 0 0 calc(33.333% - 16px) !important;
+  }
+  .testimonial-track {
+    gap: 24px !important;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .testimonial-card {
+    flex: 0 0 calc(50% - 12px) !important;
+  }
+  .testimonial-track {
+    gap: 24px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonial-card {
+    flex: 0 0 100% !important;
+  }
 }
 
 .stars {
@@ -4453,8 +4477,7 @@ html.light .home-stat-divider {
 }
 
 html.light #elite-testimonials,
-html.light #elite-cta,
-html.light .footer {
+html.light #elite-cta {
   --text: #FFFFFF;
   --text-sub: #B8D4F0;
   --border: rgba(255, 255, 255, 0.08);
@@ -4469,4 +4492,55 @@ html.light #elite-cta .btn-secondary {
 html.light #elite-cta .btn-secondary:hover {
   background: #FFFFFF !important;
   color: #071B2F !important;
+}
+
+/* Standardize all paragraph elements, hero subheadings, and section subheadings across all pages */
+p,
+.home-hero-sub,
+.about-hero-sub,
+.programs-hero-sub,
+.coaches-hero-sub,
+.gallery-hero-sub,
+.contact-hero-sub,
+.blog-hero-sub,
+.elite-hero-sub,
+.section-sub {
+  font-size: 17px !important;
+  line-height: 1.65 !important;
+}
+
+/* Centering and layout rules for hero subheadings */
+.home-hero-sub,
+.about-hero-sub,
+.programs-hero-sub,
+.coaches-hero-sub,
+.gallery-hero-sub,
+.contact-hero-sub,
+.blog-hero-sub,
+.elite-hero-sub {
+  max-width: 640px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Global Font Size Increase (Scales all Tailwind rems and vanilla text) */
+html {
+  font-size: 17.5px !important; /* Increase root base size (originally 16px) */
+}
+body {
+  font-size: 17.5px !important; /* Increase body size */
+}
+
+/* Standardize hero title font sizes across all pages */
+.home-hero-title,
+.about-hero-title,
+.programs-hero-title,
+.coaches-hero-title,
+.gallery-hero-title,
+.contact-hero-title,
+.blog-hero-title {
+  font-size: clamp(42px, 5.5vw, 80px) !important;
+  font-weight: 800 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.03em !important;
 }
