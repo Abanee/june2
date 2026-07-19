@@ -191,74 +191,156 @@
   <main id="main-content">
 
     <!-- ============================================================ -->
-    <!-- SECTION 1 — HOME HERO (SPLIT LAYOUT)                         -->
+    <!-- SECTION 1 — HOME HERO (SWIMMING ACADEMY — REDESIGNED)        -->
     <!-- ============================================================ -->
-    <section id="home" class="hero home-hero" aria-label="Introduction">
+    <section id="home" class="acad-hero" aria-label="Introduction">
 
-      <!-- Background Video Banner -->
-      <video autoplay loop muted playsinline
-        class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-30">
+      <!-- Full-bleed background video -->
+      <video autoplay loop muted playsinline class="acad-hero-video">
         <source src="hero vedio.mp4" type="video/mp4">
       </video>
 
-      <!-- Cinematic gradient mask for text clarity -->
-      <div class="hero-gradient-mask"></div>
+      <!-- Strong readable overlay — dark gradient always on -->
+      <div class="acad-hero-overlay"></div>
 
-      <!-- Orb blobs -->
-      <div class="home-hero-blob blob-1" aria-hidden="true"></div>
-      <div class="home-hero-blob blob-2" aria-hidden="true"></div>
-      <div class="home-hero-blob blob-3" aria-hidden="true"></div>
+      <!-- Subtle orb glows -->
+      <div class="acad-orb acad-orb-1" aria-hidden="true"></div>
+      <div class="acad-orb acad-orb-2" aria-hidden="true"></div>
 
-      <!-- Animated canvas -->
+      <!-- Animated water canvas -->
       <canvas id="waterCanvas" class="hero-canvas" aria-hidden="true"></canvas>
 
-      <div class="home-hero-inner flex flex-col items-center text-center max-w-4xl mx-auto z-10">
+      <!-- Main split grid -->
+      <div class="acad-hero-grid">
 
-        <!-- Glassmorphic Card Container -->
-        <div class="hero-glass-card hero-glass-card-v2 fade-up w-full">
-          <div class="home-badge">
-            <span class="home-badge-dot"></span>
-            Est. 2010 &middot; Olympic-Standard Facility
+        <!-- LEFT — Welcoming copy + CTAs -->
+        <div class="acad-hero-left fade-up">
+
+          <!-- Academy badge -->
+          <div class="acad-badge">
+            <span class="acad-badge-dot"></span>
+            Enrolments Open &nbsp;·&nbsp; Est. 2010 &nbsp;·&nbsp; All Ages Welcome
           </div>
 
-          <h1 class="home-hero-title">
-            Dive Into<br>
-            <span class="home-title-accent">Excellence</span>
-            in the Water
+          <h1 class="acad-headline">
+            Where Every<br>
+            <span class="acad-headline-accent">Swimmer</span><br>
+            Finds Their Flow
           </h1>
 
-          <p class="home-hero-sub max-w-2xl mx-auto">Professional swimming training for every age and skill level — from
-            first splash to podium finish with certified coaches.</p>
+          <p class="acad-description">
+            Join 5,000+ students across all ages and abilities. Kids, adults, women-only batches, 
+            and competitive squads — guided by ASCA-certified coaches in our Olympic-standard pool.
+          </p>
 
+          <!-- CTA row -->
+          <div class="acad-cta-row">
+            <a href="login.html" class="acad-btn-primary magnetic">Book Free Trial</a>
+            <a href="#programs" class="acad-btn-outline magnetic">View All Programs</a>
+          </div>
 
-          <!-- Stat pills row -->
-          <div class="flex flex-wrap justify-center gap-3 w-full pt-8 border-t" style="border-color: var(--border);">
-            <div class="hero-stat-pill">
-              <span class="hero-stat-pill-num" data-count="5000" data-suffix="+">5000+</span>
-              <span class="hero-stat-pill-label">Students Trained</span>
+          <!-- Stats strip -->
+          <div class="acad-stats-strip">
+            <div class="acad-stat">
+              <span class="acad-stat-num">5000+</span>
+              <span class="acad-stat-label">Students Trained</span>
             </div>
-            <div class="hero-stat-pill">
-              <span class="hero-stat-pill-num" data-count="25" data-suffix="+">25+</span>
-              <span class="hero-stat-pill-label">Certified Coaches</span>
+            <div class="acad-stat-sep"></div>
+            <div class="acad-stat">
+              <span class="acad-stat-num">25+</span>
+              <span class="acad-stat-label">Certified Coaches</span>
             </div>
-            <div class="hero-stat-pill">
-              <span class="hero-stat-pill-num" data-count="98" data-suffix="%">98%</span>
-              <span class="hero-stat-pill-label">Success Rate</span>
+            <div class="acad-stat-sep"></div>
+            <div class="acad-stat">
+              <span class="acad-stat-num">98%</span>
+              <span class="acad-stat-label">Success Rate</span>
             </div>
-            <div class="hero-stat-pill">
-              <span class="hero-stat-pill-num" data-count="15" data-suffix="+">15+</span>
-              <span class="hero-stat-pill-label">Years of Excellence</span>
+            <div class="acad-stat-sep"></div>
+            <div class="acad-stat">
+              <span class="acad-stat-num">15+</span>
+              <span class="acad-stat-label">Years Experience</span>
             </div>
           </div>
         </div>
 
+        <!-- RIGHT — 3D Auto-Rotating Image Card Deck -->
+        <div class="acad-hero-right fade-up" style="transition-delay:140ms">
+
+          <div class="acad-card-stack" id="acadCardStack">
+
+            <!-- Card 1 — Kids Academy -->
+            <div class="acad-img-card card-pos-1" data-card="1">
+              <div class="acad-img-card-bg" style="background-image:url('https://images.unsplash.com/photo-1560090995-01632a28895b?q=85&w=900&auto=format&fit=crop')"></div>
+              <div class="acad-img-card-tint"></div>
+              <div class="acad-img-card-footer">
+                <div class="acad-card-footer-inner">
+                  <p class="acad-card-footer-title">Kids Academy</p>
+                  <p class="acad-card-footer-meta">Ages 4–12 · Beginner to Intermediate</p>
+                </div>
+                <span class="acad-card-pill acad-pill-kids">Kids</span>
+              </div>
+            </div>
+
+            <!-- Card 2 — Adult & Fitness -->
+            <div class="acad-img-card card-pos-2" data-card="2">
+              <div class="acad-img-card-bg" style="background-image:url('https://images.unsplash.com/photo-1519315901367-f34ff9154487?q=85&w=900&auto=format&fit=crop')"></div>
+              <div class="acad-img-card-tint"></div>
+              <div class="acad-img-card-footer">
+                <div class="acad-card-footer-inner">
+                  <p class="acad-card-footer-title">Adult & Fitness</p>
+                  <p class="acad-card-footer-meta">All Levels · Flexible Morning & Evening</p>
+                </div>
+                <span class="acad-card-pill acad-pill-adult">Adult</span>
+              </div>
+            </div>
+
+            <!-- Card 3 — Women's Private -->
+            <div class="acad-img-card card-pos-3" data-card="3">
+              <div class="acad-img-card-bg" style="background-image:url('https://images.unsplash.com/photo-1600965962361-9035dbfd1c50?q=85&w=900&auto=format&fit=crop')"></div>
+              <div class="acad-img-card-tint"></div>
+              <div class="acad-img-card-footer">
+                <div class="acad-card-footer-inner">
+                  <p class="acad-card-footer-title">Women's Private</p>
+                  <p class="acad-card-footer-meta">Women-only · Certified Female Coaches</p>
+                </div>
+                <span class="acad-card-pill acad-pill-women">Women</span>
+              </div>
+            </div>
+
+            <!-- Card 4 — Elite Performance -->
+            <div class="acad-img-card card-pos-4" data-card="4">
+              <div class="acad-img-card-bg" style="background-image:url('https://images.unsplash.com/photo-1530549387789-4c1017266635?q=85&w=900&auto=format&fit=crop')"></div>
+              <div class="acad-img-card-tint"></div>
+              <div class="acad-img-card-footer">
+                <div class="acad-card-footer-inner">
+                  <p class="acad-card-footer-title">Elite Performance</p>
+                  <p class="acad-card-footer-meta">Advanced · Competitive Race Training</p>
+                </div>
+                <span class="acad-card-pill acad-pill-elite">Elite</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Dot indicators -->
+          <div class="acad-stack-dots" id="acadStackDots">
+            <button class="acad-stack-dot active" data-dot="0" aria-label="Kids Academy"></button>
+            <button class="acad-stack-dot" data-dot="1" aria-label="Adult Fitness"></button>
+            <button class="acad-stack-dot" data-dot="2" aria-label="Women's Private"></button>
+            <button class="acad-stack-dot" data-dot="3" aria-label="Elite Performance"></button>
+          </div>
+
+        </div>
+
       </div>
 
-      <button class="scroll-indicator" aria-label="Scroll to next section"
-        onclick="document.getElementById('why-us').scrollIntoView({behavior:'smooth'})">
-        <span></span>
-      </button>
+      <!-- CSS wave separator -->
+      <div class="acad-hero-wave" aria-hidden="true"></div>
+
     </section>
+
+
+
 
     <!-- ============================================================ -->
     <!-- SECTION 2 — WHY CHOOSE US                                     -->

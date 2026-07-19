@@ -835,3 +835,93 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+/* ==========================================================================
+   R6. HERO IMAGE CARD DECK — Auto-Rotating 3D Stack (index.html)
+   Guarded: only runs if #acadCardStack exists on the page.
+   ========================================================================== */
+(function initCardDeck() {
+  const stack    = document.getElementById('acadCardStack');
+  const dotsWrap = document.getElementById('acadStackDots');
+  if (!stack || !dotsWrap) return;
+
+  const cards    = Array.from(stack.querySelectorAll('.acad-img-card'));
+  const dots     = Array.from(dotsWrap.querySelectorAll('.acad-stack-dot'));
+  const TOTAL    = cards.length;
+  const INTERVAL = 3200;
+  const POS_CLASSES = ['card-pos-1', 'card-pos-2', 'card-pos-3', 'card-pos-4'];
+
+  let currentFront = 0;
+  let timer        = null;
+  let isAnimating  = false;
+
+  /* Apply position classes to all cards based on currentFront */
+  function applyPositions(frontIdx) {
+    cards.forEach((card, i) => {
+      card.classList.remove(...POS_CLASSES);
+      const offset = (i - frontIdx + TOTAL) % TOTAL;
+      card.classList.add(POS_CLASSES[offset]);
+    });
+  }
+
+  /* Update dot active state */
+  function updateDots(frontIdx) {
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === frontIdx));
+  }
+
+  /* Advance: front card flies out → moves to back of stack */
+  function advance() {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    const frontCard = cards[currentFront];
+    frontCard.classList.add('card-rotating-out');
+
+    setTimeout(() => {
+      frontCard.classList.remove('card-rotating-out');
+      currentFront = (currentFront + 1) % TOTAL;
+      applyPositions(currentFront);
+      updateDots(currentFront);
+      setTimeout(() => { isAnimating = false; }, 80);
+    }, 520);
+  }
+
+  /* Initialise */
+  applyPositions(currentFront);
+  updateDots(currentFront);
+
+  /* Auto-play */
+  function startTimer() { stopTimer(); timer = setInterval(advance, INTERVAL); }
+  function stopTimer()  { if (timer) { clearInterval(timer); timer = null; } }
+  startTimer();
+
+  /* Pause on hover */
+  stack.addEventListener('mouseenter', stopTimer);
+  stack.addEventListener('mouseleave', startTimer);
+
+  /* Click front card to advance */
+  stack.addEventListener('click', (e) => {
+    const card = e.target.closest('.acad-img-card');
+    if (!card || !card.classList.contains('card-pos-1')) return;
+    advance();
+    startTimer();
+  });
+
+  /* Dot navigation */
+  dots.forEach((dot, dotIdx) => {
+    dot.addEventListener('click', () => {
+      if (isAnimating || dotIdx === currentFront) return;
+      currentFront = dotIdx;
+      applyPositions(currentFront);
+      updateDots(currentFront);
+      startTimer();
+    });
+  });
+
+  /* Touch swipe */
+  let touchStartX = 0;
+  stack.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  stack.addEventListener('touchend',   (e) => { if (Math.abs(e.changedTouches[0].clientX - touchStartX) > 40) advance(); }, { passive: true });
+
+})();
+
+
