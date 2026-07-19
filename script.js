@@ -652,3 +652,186 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+/* ==========================================================================
+   REDESIGN 2.0 — NEW INTERACTION MODULES
+   All blocks are fully guarded with existence checks. Zero effect on any page
+   that doesn't contain the targeted elements.
+   ========================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ------------------------------------------------------------------ */
+  /* R1. PROGRAM FILTER TABS (index.html)                                */
+  /* ------------------------------------------------------------------ */
+  const progTabs = document.querySelectorAll('.prog-tab');
+  const programCards = document.querySelectorAll('.program-card[data-category]');
+
+  if (progTabs.length && programCards.length) {
+    progTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Update tab active state
+        progTabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        const filter = tab.dataset.filter;
+
+        // Filter cards
+        programCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.classList.remove('prog-hidden');
+            // Re-trigger fade-up animation
+            card.classList.remove('in-view');
+            requestAnimationFrame(() => card.classList.add('in-view'));
+          } else {
+            card.classList.add('prog-hidden');
+          }
+        });
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* R2. CHAMBER TABS (home2.html)                                       */
+  /* ------------------------------------------------------------------ */
+  const chamberTabBtns = document.querySelectorAll('.chamber-tab-btn');
+  const chamberPanels = document.querySelectorAll('.chamber-panel');
+
+  if (chamberTabBtns.length && chamberPanels.length) {
+    chamberTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Deactivate all tabs
+        chamberTabBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        const target = btn.dataset.chamber;
+
+        // Show target panel
+        chamberPanels.forEach(panel => {
+          panel.classList.remove('active');
+        });
+        const targetPanel = document.getElementById(`chamber-${target}`);
+        if (targetPanel) targetPanel.classList.add('active');
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* R3. TELEMETRY NODE TOOLTIPS (home2.html)                            */
+  /* ------------------------------------------------------------------ */
+  const teleTooltip = document.getElementById('teleTooltip');
+  const telePoints = document.querySelectorAll('.telemetry-point[data-tele-title]');
+
+  if (teleTooltip && telePoints.length) {
+    telePoints.forEach(point => {
+      point.addEventListener('mouseenter', (e) => {
+        const title = point.dataset.teleTitle || '';
+        const val = point.dataset.teleVal || '';
+        const sub = point.dataset.teleSub || '';
+
+        teleTooltip.innerHTML = `
+          <div class="tele-tooltip-title">${title}</div>
+          <div class="tele-tooltip-val">${val}</div>
+          ${sub ? `<div class="tele-tooltip-sub">${sub}</div>` : ''}
+        `;
+
+        // Position tooltip relative to point
+        const wrap = point.closest('.lab-scanner-wrap');
+        if (!wrap) return;
+        const wrapRect = wrap.getBoundingClientRect();
+        const ptRect = point.getBoundingClientRect();
+
+        let left = ptRect.left - wrapRect.left + ptRect.width / 2 + 14;
+        let top = ptRect.top - wrapRect.top - 10;
+
+        // Clamp right edge
+        const tooltipW = 170;
+        if (left + tooltipW > wrap.offsetWidth) {
+          left = ptRect.left - wrapRect.left - tooltipW - 14;
+        }
+
+        teleTooltip.style.left = `${left}px`;
+        teleTooltip.style.top = `${top}px`;
+        teleTooltip.classList.add('visible');
+      });
+
+      point.addEventListener('mouseleave', () => {
+        teleTooltip.classList.remove('visible');
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* R4. QUIZ STEPPER SYNC (home2.html)                                  */
+  /* ------------------------------------------------------------------ */
+  // Hook into the existing quiz functions via MutationObserver on slides
+  const quizSlides = document.querySelectorAll('.quiz-slide');
+  const stepDots = [
+    document.getElementById('stepDot1'),
+    document.getElementById('stepDot2'),
+    document.getElementById('stepDot3'),
+  ];
+  const stepLines = [
+    document.getElementById('stepLine1'),
+    document.getElementById('stepLine2'),
+  ];
+
+  function updateStepper(activeSlideId) {
+    const slideNum = parseInt(activeSlideId.replace('slide-', ''));
+    if (isNaN(slideNum)) return; // result slide — keep stepper in done state
+
+    stepDots.forEach((dot, i) => {
+      if (!dot) return;
+      const dotNum = i + 1;
+      dot.classList.remove('done', 'current');
+      if (dotNum < slideNum) dot.classList.add('done');
+      else if (dotNum === slideNum) dot.classList.add('current');
+    });
+
+    stepLines.forEach((line, i) => {
+      if (!line) return;
+      line.classList.toggle('done', i + 1 < slideNum);
+    });
+  }
+
+  if (quizSlides.length) {
+    // Observe class changes on slides to detect active slide changes
+    const slideObserver = new MutationObserver(() => {
+      const activeSlide = document.querySelector('.quiz-slide.active');
+      if (activeSlide) updateStepper(activeSlide.id);
+    });
+    quizSlides.forEach(slide => {
+      slideObserver.observe(slide, { attributes: true, attributeFilter: ['class'] });
+    });
+    // Set initial state
+    const initActive = document.querySelector('.quiz-slide.active');
+    if (initActive) updateStepper(initActive.id);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* R5. STAT BAR VIEWPORT ANIMATION (home2.html)                        */
+  /* ------------------------------------------------------------------ */
+  const statFills = document.querySelectorAll('.stat-line-fill[data-fill]');
+
+  if (statFills.length) {
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    statFills.forEach(bar => barObserver.observe(bar));
+  }
+
+});
+

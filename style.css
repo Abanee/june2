@@ -4594,3 +4594,505 @@ html:not(.light) .blog-stat-num {
   -webkit-text-fill-color: var(--primary) !important;
   color: var(--primary) !important;
 }
+
+/* ==========================================================================
+   REDESIGN 2.0 — NEW ADDITIVE CLASSES (index.html + home2.html only)
+   All rules below are NEW classes. Zero conflicts with existing pages.
+   ========================================================================== */
+
+/* ---------- Hero Gradient Mask (cinematic overlay) ---------- */
+.hero-gradient-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(5, 19, 41, 0.72) 0%,
+    rgba(5, 19, 41, 0.45) 40%,
+    rgba(5, 19, 41, 0.65) 100%
+  );
+  pointer-events: none;
+}
+html.light .hero-gradient-mask {
+  background: linear-gradient(
+    180deg,
+    rgba(244, 248, 252, 0.6) 0%,
+    rgba(244, 248, 252, 0.25) 40%,
+    rgba(244, 248, 252, 0.55) 100%
+  );
+}
+
+/* ---------- Glass Card v2 (enhanced hero card) ---------- */
+.hero-glass-card-v2 {
+  background: rgba(5, 19, 41, 0.68);
+  border: 1px solid rgba(0, 229, 255, 0.18);
+  border-radius: var(--radius);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 229, 255, 0.08), inset 0 1px 0 rgba(255,255,255,0.06);
+  padding: 52px 48px 40px;
+}
+html.light .hero-glass-card-v2 {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(0, 119, 194, 0.18);
+  box-shadow: 0 24px 64px rgba(11, 30, 54, 0.12), 0 0 40px rgba(0, 119, 194, 0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+/* ---------- Floating Stat Pill (hero stats) ---------- */
+.hero-stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s var(--ease);
+}
+.hero-stat-pill:hover {
+  background: rgba(0, 229, 255, 0.14);
+  border-color: rgba(0, 229, 255, 0.4);
+  transform: translateY(-2px);
+}
+html.light .hero-stat-pill {
+  background: rgba(0, 119, 194, 0.06);
+  border-color: rgba(0, 119, 194, 0.18);
+}
+.hero-stat-pill-num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-stat-pill-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-sub);
+}
+
+/* ---------- Program Filter Tabs ---------- */
+.program-filter-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+.prog-tab {
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text-sub);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+  white-space: nowrap;
+}
+.prog-tab:hover {
+  border-color: var(--primary);
+  color: var(--text);
+}
+.prog-tab.active {
+  background: var(--grad);
+  border-color: transparent;
+  color: #071B2F;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.25);
+}
+html.light .prog-tab.active {
+  color: #fff;
+}
+
+/* Program card hidden state */
+.program-card.prog-hidden {
+  display: none !important;
+}
+
+/* Program card hover reveal description */
+.program-card {
+  position: relative;
+  overflow: hidden;
+}
+.program-card .program-body {
+  transition: transform 0.35s var(--ease);
+}
+.program-card:hover .program-body {
+  transform: translateY(-4px);
+}
+
+/* ---------- Why Card Enhanced Glow Hover ---------- */
+.why-card-v2 {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s var(--ease);
+}
+.why-card-v2::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 0%, rgba(0, 229, 255, 0.1) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+  pointer-events: none;
+}
+.why-card-v2:hover::before {
+  opacity: 1;
+}
+.why-card-v2:hover {
+  border-color: rgba(0, 229, 255, 0.25) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25), 0 0 30px rgba(0, 229, 255, 0.08);
+  transform: translateY(-5px);
+}
+
+/* ---------- Quote Mark for Testimonials ---------- */
+.testimonial-card-v2 {
+  position: relative;
+  padding-top: 52px !important;
+}
+.testimonial-card-v2::before {
+  content: '\201C';
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  font-size: 64px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  line-height: 1;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ---------- Scanner Line (Telemetry Lab) ---------- */
+.lab-scanner-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+}
+.scanner-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.8), 0 0 32px rgba(0, 229, 255, 0.4);
+  animation: scannerMove 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+@keyframes scannerMove {
+  0%   { top: 5%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 95%; opacity: 0; }
+}
+
+/* ---------- Telemetry Node Tooltip ---------- */
+.telemetry-point {
+  cursor: pointer;
+  z-index: 10;
+}
+.tele-tooltip {
+  position: absolute;
+  background: rgba(5, 19, 41, 0.92);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  border-radius: 10px;
+  padding: 10px 14px;
+  backdrop-filter: blur(12px);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 20;
+  opacity: 0;
+  transform: translateY(6px) scale(0.94);
+  transition: all 0.22s var(--ease);
+  min-width: 160px;
+}
+.tele-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.tele-tooltip-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+.tele-tooltip-val {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+.tele-tooltip-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  margin-top: 2px;
+}
+
+/* Pulse ring around telemetry point */
+.telemetry-point::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 229, 255, 0.5);
+  animation: telePulse 2s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes telePulse {
+  0% { width: 14px; height: 14px; opacity: 0.8; }
+  100% { width: 36px; height: 36px; opacity: 0; }
+}
+
+/* ---------- Chamber Tabs ---------- */
+.chamber-tabs-nav {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 36px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.chamber-tab-btn {
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text-sub);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+.chamber-tab-btn:hover {
+  border-color: var(--primary);
+  color: var(--text);
+}
+.chamber-tab-btn.active {
+  background: var(--grad);
+  border-color: transparent;
+  color: #071B2F;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.25);
+}
+html.light .chamber-tab-btn.active {
+  color: #fff;
+}
+.chamber-panel {
+  display: none;
+  animation: chamberFadeIn 0.4s var(--ease) forwards;
+}
+.chamber-panel.active {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: center;
+}
+@keyframes chamberFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.chamber-panel-img {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.chamber-panel-img img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s var(--ease);
+}
+.chamber-panel-img:hover img {
+  transform: scale(1.04);
+}
+.chamber-panel-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.chamber-feature-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  transition: all 0.28s var(--ease);
+}
+.chamber-feature-item:hover {
+  border-color: rgba(0, 229, 255, 0.25);
+  transform: translateX(5px);
+}
+.chamber-feature-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--grad);
+  display: grid;
+  place-items: center;
+  color: #071B2F;
+  flex-shrink: 0;
+}
+html.light .chamber-feature-icon { color: #fff; }
+.chamber-feature-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.chamber-feature-desc {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.55;
+}
+@media (max-width: 768px) {
+  .chamber-panel.active { grid-template-columns: 1fr; }
+}
+
+/* ---------- Quiz Stepper Indicator ---------- */
+.quiz-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 36px;
+}
+.quiz-step-dot {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  border: 2px solid var(--border);
+  color: var(--text-sub);
+  background: var(--glass);
+  transition: all 0.3s var(--ease);
+  position: relative;
+  z-index: 2;
+}
+.quiz-step-dot.done {
+  background: var(--grad);
+  border-color: transparent;
+  color: #071B2F;
+}
+html.light .quiz-step-dot.done { color: #fff; }
+.quiz-step-dot.current {
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.35);
+}
+.quiz-step-line {
+  height: 2px;
+  width: 48px;
+  background: var(--border);
+  transition: background 0.4s var(--ease);
+}
+.quiz-step-line.done {
+  background: var(--grad);
+}
+
+/* Quiz result loader */
+.quiz-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 24px 0;
+}
+.quiz-loader-ring {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  animation: quizSpin 0.9s linear infinite;
+}
+@keyframes quizSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Masterclass Ticket Rows ---------- */
+.masterclass-ticket {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px 32px;
+  backdrop-filter: blur(12px);
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  align-items: center;
+  gap: 28px;
+  transition: all 0.3s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.masterclass-ticket::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--grad);
+  border-radius: 2px 0 0 2px;
+}
+.masterclass-ticket:hover {
+  border-color: rgba(0, 229, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+.ticket-spots {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-top: 6px;
+  width: fit-content;
+}
+.ticket-spots-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #f59e0b;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.ticket-spots.sold-out {
+  color: var(--text-sub);
+  background: transparent;
+  border-color: var(--border);
+}
+.ticket-spots.sold-out .ticket-spots-dot {
+  background: var(--text-sub);
+  animation: none;
+}
+@media (max-width: 768px) {
+  .masterclass-ticket { grid-template-columns: 1fr; gap: 16px; text-align: center; }
+  .masterclass-ticket::before { width: 100%; height: 3px; top: 0; left: 0; right: 0; bottom: auto; border-radius: 2px 2px 0 0; }
+  .ticket-spots { margin: 0 auto; }
+}
+
+/* ---------- Stat Bar Viewport Animation ---------- */
+.stat-line-fill {
+  width: 0 !important;
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.stat-line-fill.animated {
+  width: var(--target-width) !important;
+}

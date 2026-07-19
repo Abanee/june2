@@ -775,20 +775,26 @@
           </div>
 
           <div class="lab-visual fade-left">
-            <img src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?q=80&w=700" alt="Telemetry analysis screen" />
-            <div class="lab-telemetry-overlay">
-              <div class="telemetry-tag">
-                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                ACTIVE TRACKING
+            <div class="lab-scanner-wrap">
+              <img src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?q=80&w=700" alt="Telemetry analysis screen" />
+              <!-- Animated scanner line -->
+              <div class="scanner-line" aria-hidden="true"></div>
+              <div class="lab-telemetry-overlay">
+                <div class="telemetry-tag">
+                  <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                  ACTIVE TRACKING
+                </div>
+                <h3 class="text-lg font-bold">Freestyle Hydrodynamic Telemetry</h3>
+                <p class="text-xs text-slate-300">Targeting hip alignment and vertical forearm entry indicators.</p>
               </div>
-              <h3 class="text-lg font-bold">Freestyle Hydrodynamic Telemetry</h3>
-              <p class="text-xs text-slate-300">Targeting hip alignment and vertical forearm entry indicators.</p>
+              <!-- Telemetry dots mimicking dynamic AI tags -->
+              <div class="telemetry-point pt-head" title="Head Position" data-tele-title="Head Position" data-tele-val="Optimal Alignment" data-tele-sub="Neutral spine · 0.3° deviation"></div>
+              <div class="telemetry-point pt-shoulder" title="Shoulder Roll" data-tele-title="Shoulder Roll" data-tele-val="38° Catch Angle" data-tele-sub="Target: 35-42° · Pass"></div>
+              <div class="telemetry-point pt-hip" title="Hip Rotation" data-tele-title="Hip Rotation" data-tele-val="54° Rotation" data-tele-sub="Power transfer: 91%"></div>
+              <div class="telemetry-point pt-feet" title="Kick Velocity" data-tele-title="Kick Velocity" data-tele-val="1.8m/s" data-tele-sub="Cadence: 108 bpm"></div>
+              <!-- Tooltip element -->
+              <div class="tele-tooltip" id="teleTooltip"></div>
             </div>
-            <!-- Telemetry dots mimicking dynamic AI tags -->
-            <div class="telemetry-point pt-head" title="Head Position"></div>
-            <div class="telemetry-point pt-shoulder" title="Shoulder Roll"></div>
-            <div class="telemetry-point pt-hip" title="Hip Rotation"></div>
-            <div class="telemetry-point pt-feet" title="Kick Velocity"></div>
           </div>
         </div>
       </div>
@@ -850,39 +856,98 @@
           <p class="text-sub mt-4">Every detail is tailored to provide a seamless, luxurious athletic workflow from entry to departure.</p>
         </div>
 
-        <div class="chambers-grid">
-          <article class="chamber-card fade-up">
-            <div class="chamber-img-wrap">
-              <img src="./Assets/homepg1.jpg" alt="Private Member Lounge" />
-              <span class="chamber-badge">REST &amp; SOCIAL</span>
-            </div>
-            <div class="chamber-body">
-              <h3 class="chamber-title">Elite Member Lounge</h3>
-              <p class="chamber-desc">Premium private work spaces, high-speed WiFi, nutrient-infused custom refreshments, and a scenic panorama overlooking the competition lanes.</p>
-            </div>
-          </article>
+        <!-- Chamber Tabs Navigation -->
+        <div class="chamber-tabs-nav" role="tablist" aria-label="Facility chambers">
+          <button class="chamber-tab-btn active" data-chamber="lounge" role="tab" aria-selected="true">Elite Lounge</button>
+          <button class="chamber-tab-btn" data-chamber="changing" role="tab" aria-selected="false">Luxury Suites</button>
+          <button class="chamber-tab-btn" data-chamber="pool" role="tab" aria-selected="false">VIP Lanes</button>
+        </div>
 
-          <article class="chamber-card fade-up">
-            <div class="chamber-img-wrap">
-              <img src="./Assets/homepg2.jpg" alt="Private Changing Suites" />
-              <span class="chamber-badge">HYGIENE &amp; STYLE</span>
+        <!-- Lounge Panel -->
+        <div class="chamber-panel active" id="chamber-lounge">
+          <div class="chamber-panel-img">
+            <img src="./Assets/homepg1.jpg" alt="Elite Member Lounge" />
+          </div>
+          <div class="chamber-panel-info">
+            <h3 class="text-2xl font-bold mb-2" style="color: var(--text);">Elite Member Lounge</h3>
+            <p style="color: var(--text-sub); margin-bottom: 20px; font-size: 14px; line-height: 1.6;">Premium private work spaces overlooking competition lanes with custom refreshments and high-speed WiFi.</p>
+            <div class="chamber-feature-item">
+              <div class="chamber-feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <p class="chamber-feature-title">Private Workspaces</p>
+                <p class="chamber-feature-desc">Dedicated quiet zones with power stations, ergonomic seating, and panoramic pool views.</p>
+              </div>
             </div>
-            <div class="chamber-body">
-              <h3 class="chamber-title">Luxury Dressing Chambers</h3>
-              <p class="chamber-desc">Keyless secure biometric locker arrays, heated towel sheets, premium organic skincare products, and rainfall private shower heads.</p>
+            <div class="chamber-feature-item">
+              <div class="chamber-feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+              </div>
+              <div>
+                <p class="chamber-feature-title">Nutrient Bar</p>
+                <p class="chamber-feature-desc">Curated hydration and recovery nutrition crafted by sports dietitians for peak recovery.</p>
+              </div>
             </div>
-          </article>
+          </div>
+        </div>
 
-          <article class="chamber-card fade-up">
-            <div class="chamber-img-wrap">
-              <img src="./Assets/homepg3.jpg" alt="High-Performance Training Pool" />
-              <span class="chamber-badge">SWIM DECKS</span>
+        <!-- Changing Suites Panel -->
+        <div class="chamber-panel" id="chamber-changing">
+          <div class="chamber-panel-img">
+            <img src="./Assets/homepg2.jpg" alt="Luxury Changing Suites" />
+          </div>
+          <div class="chamber-panel-info">
+            <h3 class="text-2xl font-bold mb-2" style="color: var(--text);">Luxury Dressing Chambers</h3>
+            <p style="color: var(--text-sub); margin-bottom: 20px; font-size: 14px; line-height: 1.6;">Keyless biometric lockers, heated towels, premium organic skincare, and private rainfall showers.</p>
+            <div class="chamber-feature-item">
+              <div class="chamber-feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </div>
+              <div>
+                <p class="chamber-feature-title">Biometric Locker Arrays</p>
+                <p class="chamber-feature-desc">Fingerprint-secured secure storage with phone charging and temperature control.</p>
+              </div>
             </div>
-            <div class="chamber-body">
-              <h3 class="chamber-title">Reserved VIP Lanes</h3>
-              <p class="chamber-desc">Reserved slots with max 2 swimmers per lane. Ultra-pure ozone filtration systems ensure crystal-clear water with zero chlorine smell.</p>
+            <div class="chamber-feature-item">
+              <div class="chamber-feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div>
+                <p class="chamber-feature-title">Rainfall Shower Cabins</p>
+                <p class="chamber-feature-desc">Private rainfall showers with mineral-enriched water and premium organic amenities.</p>
+              </div>
             </div>
-          </article>
+          </div>
+        </div>
+
+        <!-- VIP Pool Panel -->
+        <div class="chamber-panel" id="chamber-pool">
+          <div class="chamber-panel-img">
+            <img src="./Assets/homepg3.jpg" alt="Reserved VIP Lanes" />
+          </div>
+          <div class="chamber-panel-info">
+            <h3 class="text-2xl font-bold mb-2" style="color: var(--text);">Reserved VIP Lanes</h3>
+            <p style="color: var(--text-sub); margin-bottom: 20px; font-size: 14px; line-height: 1.6;">Max 2 swimmers per lane. Ultra-pure ozone filtration with zero chlorine odor and crystal-clear visibility.</p>
+            <div class="chamber-feature-item">
+              <div class="chamber-feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <p class="chamber-feature-title">Reserved Time Slots</p>
+                <p class="chamber-feature-desc">30-minute reserved blocks with zero waiting time, fully digital booking via the member portal.</p>
+              </div>
+            </div>
+            <div class="chamber-feature-item">
+              <div class="chamber-feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+              <div>
+                <p class="chamber-feature-title">Underwater Cameras</p>
+                <p class="chamber-feature-desc">Multi-angle 4K underwater capture streamed live to the member telemetry portal.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -896,6 +961,15 @@
           <p class="eyebrow">Smart Assessment</p>
           <h2 class="text-3xl sm:text-4xl font-extrabold">Instant Swim Level Finder</h2>
           <p class="text-sub mt-4">Answer these quick questions to calculate your custom training profile and target program recommendations.</p>
+        </div>
+
+        <!-- Quiz Step Indicator -->
+        <div class="quiz-stepper fade-up" id="quizStepper" aria-label="Quiz progress">
+          <div class="quiz-step-dot current" id="stepDot1" aria-label="Step 1">1</div>
+          <div class="quiz-step-line" id="stepLine1"></div>
+          <div class="quiz-step-dot" id="stepDot2" aria-label="Step 2">2</div>
+          <div class="quiz-step-line" id="stepLine2"></div>
+          <div class="quiz-step-dot" id="stepDot3" aria-label="Step 3">3</div>
         </div>
 
         <div class="finder-box fade-up">
@@ -1004,8 +1078,8 @@
           <p class="text-sub mt-4">Elevate your technique with special guest clinics taught by Olympic medalists and national head coaches.</p>
         </div>
 
-        <div class="calendar-list">
-          <article class="calendar-row fade-up">
+        <div class="calendar-list" id="masterclassList">
+          <article class="masterclass-ticket fade-up">
             <div class="cal-date">
               <span class="cal-day">14</span>
               <span class="cal-month">July 2026</span>
@@ -1013,11 +1087,12 @@
             <div>
               <h3 class="cal-title">AI Biomechanics Stroke Clinic</h3>
               <p class="cal-desc">Taught by Coach Sara Kim. Dedicated study on catch biomechanics and hydrodynamic drag reduction using underwater telemetry feedback.</p>
+              <div class="ticket-spots"><span class="ticket-spots-dot"></span>Only 4 spots left</div>
             </div>
             <a href="contact.html" class="btn-secondary py-3 px-6 text-sm">Register Slot</a>
           </article>
 
-          <article class="calendar-row fade-up">
+          <article class="masterclass-ticket fade-up">
             <div class="cal-date">
               <span class="cal-day">28</span>
               <span class="cal-month">July 2026</span>
@@ -1025,11 +1100,12 @@
             <div>
               <h3 class="cal-title">Open Water &amp; Draft Strategy Masterclass</h3>
               <p class="cal-desc">Special guest presentation on wave draft physics, ocean navigation skills, and pack racing positioning for active triathletes.</p>
+              <div class="ticket-spots"><span class="ticket-spots-dot"></span>8 spots remaining</div>
             </div>
             <a href="contact.html" class="btn-secondary py-3 px-6 text-sm">Register Slot</a>
           </article>
 
-          <article class="calendar-row fade-up">
+          <article class="masterclass-ticket fade-up">
             <div class="cal-date">
               <span class="cal-day">09</span>
               <span class="cal-month">Aug 2026</span>
@@ -1037,6 +1113,7 @@
             <div>
               <h3 class="cal-title">Lactate Testing &amp; Endurance Protocols</h3>
               <p class="cal-desc">Head coach Arjun Mehta directs threshold endurance intervals coupled with blood lactate screening curves to map exact training paces.</p>
+              <div class="ticket-spots sold-out"><span class="ticket-spots-dot"></span>Registration open</div>
             </div>
             <a href="contact.html" class="btn-secondary py-3 px-6 text-sm">Register Slot</a>
           </article>
@@ -1077,7 +1154,7 @@
                 <span class="text-sm font-bold text-gradient">+ 28%</span>
               </div>
               <div class="stat-line-progress">
-                <div class="stat-line-fill" style="width: 82%"></div>
+                <div class="stat-line-fill" style="--target-width: 82%" data-fill="82%"></div>
               </div>
             </div>
 
@@ -1087,7 +1164,7 @@
                 <span class="text-sm font-bold text-gradient">+ 19%</span>
               </div>
               <div class="stat-line-progress">
-                <div class="stat-line-fill" style="width: 68%"></div>
+                <div class="stat-line-fill" style="--target-width: 68%" data-fill="68%"></div>
               </div>
             </div>
 
@@ -1097,7 +1174,7 @@
                 <span class="text-sm font-bold text-gradient">+ 34%</span>
               </div>
               <div class="stat-line-progress">
-                <div class="stat-line-fill" style="width: 91%"></div>
+                <div class="stat-line-fill" style="--target-width: 91%" data-fill="91%"></div>
               </div>
             </div>
           </div>
