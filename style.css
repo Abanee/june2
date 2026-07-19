@@ -106,7 +106,7 @@ img { max-width: 100%; display: block; }
   border-radius: 6px;
 }
 
-.text-center { text-align: center; margin-top: 48px; }
+.text-center { text-align: center; }
 
 
 
@@ -1767,7 +1767,23 @@ html.light .coach-badge { background: rgba(2, 132, 199, 0.08); border-color: rgb
 .footer-col a { color: var(--text-sub); font-size: 14px; transition: color 0.25s var(--ease); }
 .footer-col a:hover { color: var(--primary); }
 .footer-about { color: var(--text-sub); font-size: 14px; line-height: 1.6; margin: 14px 0 20px; }
-.footer-contact li { color: var(--text-sub); font-size: 14px; }
+.footer-contact li {
+  color: var(--text-sub);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer-contact li svg {
+  flex-shrink: 0;
+  color: var(--primary);
+  width: 16px;
+  height: 16px;
+  transition: color 0.25s var(--ease);
+}
+.footer-contact li:hover svg {
+  color: var(--accent);
+}
 
 .social-icons { display: flex; gap: 12px; }
 .social-icons a {
